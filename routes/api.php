@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\DiagnosisController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('admin')->group(function() {
+
+    Route::prefix('master-keperawatan')->group(function() {
+
+        Route::prefix('sdki')->group(function() {
+
+            Route::resource('diagnosis', DiagnosisController::class);
+
+        });
+
+        Route::prefix('slki')->group(function() {
+
+        });
+
+    });
+
 });

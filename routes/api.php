@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGej
 use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\LuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\DiagnosisLuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\LuaranDiagnosisController;
+use App\Http\Controllers\AI\AutoDiagnosisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,3 +61,5 @@ Route::prefix('admin')->group(function() {
     });
 
 });
+
+Route::post('ai/auto-diagnosis',[AutoDiagnosisController::class, "auto_diagnosis"]);

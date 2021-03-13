@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\DiagnosisController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Relasi\DiagnosisTandaDanGejalaController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGejalaController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\LuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\DiagnosisLuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\LuaranDiagnosisController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +27,10 @@ Route::prefix('admin')->group(function() {
 
             Route::apiResource('diagnosis', DiagnosisController::class);
             Route::apiResource('tanda-dan-gejala', TandaDanGejalaController::class);
+
+            Route::get('diagnosis/{diagnosis/tanda-dan-gejala', [DiagnosisTandaDanGejalaController::class, "index"]);
+            Route::post('diagnosis/{diagnosis/tanda-dan-gejala', [DiagnosisTandaDanGejalaController::class, "store"]);
+            Route::delete('diagnosis/{diagnosis/tanda-dan-gejala', [DiagnosisTandaDanGejalaController::class, "destroy"]);
 
             Route::get('diagnosis/{diagnosis}/luaran',[DiagnosisLuaranController::class, "index"]);
             Route::post('diagnosis/{diagnosis}/luaran',[DiagnosisLuaranController::class, "store"]);

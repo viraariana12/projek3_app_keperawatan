@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\DiagnosisController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Relasi\DiagnosisTandaDanGejalaController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGejalaController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGejalaDiagnosisController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SIKI\Intervensi\IntervensiController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\LuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\DiagnosisLuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\LuaranDiagnosisController;
@@ -54,6 +55,8 @@ Route::prefix('admin')->group(function() {
         });
 
         Route::prefix('siki')->group(function() {
+
+            Route::apiResource('intervensi', IntervensiController::class);
 
         });
 

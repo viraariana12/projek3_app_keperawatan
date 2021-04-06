@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\MasterKeperawatan\SIKI\Intervensi\IntervensiContr
 use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\LuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\DiagnosisLuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\LuaranDiagnosisController;
+use App\Http\Controllers\Perawat\AkunPerawatController;
+use App\Http\Controllers\Perawat\TimPerawat\AnggotaTimPerawatController;
+use App\Http\Controllers\Perawat\TimPerawat\KetuaTimPerawatController;
+use App\Http\Controllers\Perawat\TimPerawat\TimPerawatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +24,29 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::prefix('perawat')->group(function() {
+
+    Route::post('masuk', [AkunPerawatController::class, "masuk"]);
+    Route::post('daftar', [AkunPerawatController::class, "daftar"]);
+
+    Route::middleware(['auth:sanctum'])->group(function () {
+
+        Route::get('profil', [AkunPerawatController::class, "lihat_profil"]);
+        Route::post('profil', [AkunPerawatController::class, "ubah_profil"]);
+
+        Route::get('tim', [TimPerawatController::class, "daftar_tim"]);
+        Route::post('tim', [TimPerawatController::class, "buat_tim"]);
+
+        Route::get('tim/{tim}/anggota', [AnggotaTimPerawatController::class, "daftar_anggota"]);
+        Route::post('tim/{tim}/anggota', [KetuaTimPerawatController::class, "tambah_anggota"]);
+        Route::delete('tim/{tim}/anggota', [KetuaTimPerawatController::class, "hapus_anggota"]);
+
+        Route::delete('tim/{tim}/keluar', [AnggotaTimPerawatController::class, "keluar_tim"]);
+
+    });
+
+});
 
 Route::prefix('admin')->group(function() {
 

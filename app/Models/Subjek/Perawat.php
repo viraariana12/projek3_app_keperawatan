@@ -2,6 +2,7 @@
 
 namespace App\Models\Subjek;
 
+use App\Models\Keperawatan\AsuhanKeperawatan;
 use App\Models\Keperawatan\TimPerawat;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,5 +44,13 @@ class Perawat extends Authenticatable
             "id_perawat",
             "id_tim_perawat"
         )->withPivot('ketua');
+    }
+
+    public function asuhan_keperawatan() {
+        return $this->hasMany(
+            AsuhanKeperawatan::class,
+            "id_perawat",
+            "id_perawat"
+        );
     }
 }

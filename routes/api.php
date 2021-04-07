@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\MasterKeperawatan\SIKI\Intervensi\IntervensiContr
 use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\LuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\DiagnosisLuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\LuaranDiagnosisController;
+use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Perawat\AkunPerawatController;
+use App\Http\Controllers\Perawat\AsuhanKeperawatan\AsuhanKeperawatanPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\AnggotaTimPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\KetuaTimPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\TimPerawatController;
@@ -44,11 +46,16 @@ Route::prefix('perawat')->group(function() {
 
         Route::delete('tim/{tim}/keluar', [AnggotaTimPerawatController::class, "keluar_tim"]);
 
+        Route::get('askep',[AsuhanKeperawatanPerawatController::class, "index"]);
+        Route::post('askep',[AsuhanKeperawatanPerawatController::class, "store"]);
+
     });
 
 });
 
 Route::prefix('admin')->group(function() {
+
+    Route::apiResource('pasien', PasienController::class);
 
     Route::prefix('master-keperawatan')->group(function() {
 

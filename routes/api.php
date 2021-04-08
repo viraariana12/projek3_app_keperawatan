@@ -9,12 +9,17 @@ use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\LuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\DiagnosisLuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\LuaranDiagnosisController;
 use App\Http\Controllers\Admin\PasienController;
+use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Perawat\AkunPerawatController;
 use App\Http\Controllers\Perawat\AsuhanKeperawatan\AsuhanKeperawatanPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\AnggotaTimPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\KetuaTimPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\TimPerawatController;
 use Illuminate\Support\Facades\Route;
+use App\Models\MasterKeperawatan\SDKI\Diagnosis;
+
+
+Route::get('/testing/{id}', [TestController::class, "index"]);
 
 /*
 |--------------------------------------------------------------------------

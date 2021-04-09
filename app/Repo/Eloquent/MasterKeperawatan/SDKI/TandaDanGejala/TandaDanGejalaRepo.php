@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repo\Eloquent\TandaDanGejala;
+namespace App\Repo\Eloquent\MasterKeperawatan\SDKI\TandaDanGejala;
 
 use App\Repo\Eloquent\EloquentRepo;
 use App\Models\MasterKeperawatan\SDKI\TandaDanGejala;

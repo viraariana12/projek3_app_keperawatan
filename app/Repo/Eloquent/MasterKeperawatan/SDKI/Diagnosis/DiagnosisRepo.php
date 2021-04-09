@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repo\Eloquent\Diagnosis;
+namespace App\Repo\Eloquent\MasterKeperawatan\SDKI\Diagnosis;
 
 use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 use App\Repo\Eloquent\EloquentRepo;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repo\Eloquent\Diagnosis\Relasi;
+namespace App\Repo\Eloquent\MasterKeperawatan\SDKI\Diagnosis\Relasi;
 
-use App\Repo\Eloquent\Diagnosis\DiagnosisRepo;
-use App\Repo\Eloquent\TandaDanGejala\TandaDanGejalaRepo;
+use App\Repo\Eloquent\MasterKeperawatan\SDKI\Diagnosis\DiagnosisRepo;
+use App\Repo\Eloquent\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGejalaRepo;
 use App\Repo\Eloquent\EloquentManyToManyRepo;
 
 

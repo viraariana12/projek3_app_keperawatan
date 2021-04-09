@@ -3,23 +3,19 @@
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\DiagnosisController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Relasi\DiagnosisTandaDanGejalaController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGejalaController;
-use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGejalaDiagnosisController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SIKI\Intervensi\IntervensiController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\LuaranController;
-use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\DiagnosisLuaranController;
-use App\Http\Controllers\Admin\MasterKeperawatan\Tautan\LuaranDiagnosisController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Relasi\DiagnosisLuaranController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\Relasi\LuaranDiagnosisController;
 use App\Http\Controllers\Admin\PasienController;
-use App\Http\Controllers\Admin\TestController;
+
 use App\Http\Controllers\Perawat\AkunPerawatController;
 use App\Http\Controllers\Perawat\AsuhanKeperawatan\AsuhanKeperawatanPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\AnggotaTimPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\KetuaTimPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\TimPerawatController;
 use Illuminate\Support\Facades\Route;
-use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 
-
-Route::get('/testing/{id}', [TestController::class, "index"]);
 
 /*
 |--------------------------------------------------------------------------
@@ -67,29 +63,19 @@ Route::prefix('admin')->group(function() {
         Route::prefix('sdki')->group(function() {
 
             Route::apiResource('diagnosis', DiagnosisController::class);
+            Route::apiResource('diagnosis.luaran', DiagnosisLuaranController::class);
+            Route::apiResource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);
+
+
             Route::apiResource('tanda-dan-gejala', TandaDanGejalaController::class);
-
-            Route::get('tanda-dan-gejala/{tandaDanGejala}/diagnosis', [TandaDanGejalaDiagnosisController::class, "index"]);
-            Route::post('tanda-dan-gejala/{tandaDanGejala}/diagnosis', [TandaDanGejalaDiagnosisController::class, "store"]);
-            Route::delete('tanda-dan-gejala/{tandaDanGejala}/diagnosis', [TandaDanGejalaDiagnosisController::class, "destroy"]);
-
-            Route::get('diagnosis/{diagnosis}/tanda-dan-gejala', [DiagnosisTandaDanGejalaController::class, "index"]);
-            Route::post('diagnosis/{diagnosis}/tanda-dan-gejala', [DiagnosisTandaDanGejalaController::class, "store"]);
-            Route::delete('diagnosis/{diagnosis}/tanda-dan-gejala', [DiagnosisTandaDanGejalaController::class, "destroy"]);
-
-            Route::get('diagnosis/{diagnosis}/luaran',[DiagnosisLuaranController::class, "index"]);
-            Route::post('diagnosis/{diagnosis}/luaran',[DiagnosisLuaranController::class, "store"]);
-            Route::delete('diagnosis/{diagnosis}/luaran',[DiagnosisLuaranController::class, "destroy"]);
 
         });
 
         Route::prefix('slki')->group(function() {
 
             Route::apiResource('luaran', LuaranController::class);
+            Route::apiResource('luaran.diagnosis', LuaranDiagnosisController::class);
 
-            Route::get('luaran/{luaran}/diagnosis',[LuaranDiagnosisController::class, "index"]);
-            Route::post('luaran/{luaran}/diagnosis',[LuaranDiagnosisController::class, "store"]);
-            Route::delete('luaran/{luaran}/diagnosis',[LuaranDiagnosisController::class, "destroy"]);
 
         });
 

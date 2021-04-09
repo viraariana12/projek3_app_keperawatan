@@ -3,44 +3,58 @@
 namespace App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala;
 
 use App\Http\Controllers\Controller;
-use App\Models\MasterKeperawatan\SDKI\Diagnosis;
-use App\Models\MasterKeperawatan\SDKI\TandaDanGejala;
 use Illuminate\Http\Request;
 
 class TandaDanGejalaDiagnosisController extends Controller
 {
-    public function index(TandaDanGejala $tandaDanGejala) {
+    private $repo;
 
-        $daftar_diagnosis = $tandaDanGejala->diagnosis;
 
-        return response()->json($daftar_diagnosis, 200);
+
+    public function index($diagnosis) {
+
+        return response()->json(
+            $this->repo->daftar($diagnosis)
+        );
 
     }
 
-    public function store(TandaDanGejala $tandaDanGejala, Request $request) {
+    public function store(Request $request, $diagnosis) {
 
-        $diagnosis = Diagnosis::find($request->id_diagnosis_keperawatan);
+        $this->repo->tambahBaru(
+            $diagnosis,
+            $request->data,
+            $request->pivot
+        );
 
-        $tandaDanGejala->diagnosis()->attach($diagnosis, [
-            "mayor" => $request->mayor,
-            "objektif" => $request->objektif
+        return response()->json([
+            "message" => "Data tanda dan gejala berhasil ditambahkan"
+        ], 201);
+
+    }
+
+    public function show($diagnosis, $tandaDanGejala) {
+        return response()->json(
+            $this->repo->cariId($diagnosis, $tandaDanGejala));
+    }
+
+    public function update(Request $request, $diagnosis, $tandaDanGejala) {
+
+        $this->repo->tambahLama($diagnosis, $tandaDanGejala, $request->pivot);
+
+        return response()->json([
+            "message" => "Data tanda dan gejala berhasil ditambahkan"
         ]);
 
-        return response()->json([
-            "message" => "Data diagnosis berhasil dikaitkan dengan tanda dan gejala"
-        ],200);
-
     }
 
-    public function destroy(TandaDanGejala $tandaDanGejala, Request $request) {
+    public function destroy($diagnosis, $tandaDanGejala) {
 
-        $diagnosis = Diagnosis::find($request->id_diagnosis_keperawatan);
-
-        $tandaDanGejala->diagnosis()->detach($diagnosis);
+        $this->repo->hapus($diagnosis, $tandaDanGejala);
 
         return response()->json([
-            "message" => "Data diagnosis berhasil dilepaskan dari tanda dan gejala"
-        ],200);
+            "message" => "Data tanda dan gejala berhasil dihapus"
+        ]);
 
     }
 }

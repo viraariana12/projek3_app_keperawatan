@@ -3,56 +3,53 @@
 namespace App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala;
 
 use App\Http\Controllers\Controller;
-use App\Models\MasterKeperawatan\SDKI\TandaDanGejala;
+use App\Repo\Eloquent\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGejalaRepo;
 use Illuminate\Http\Request;
 
 class TandaDanGejalaController extends Controller
 {
+    protected $tandaDanGejalaRepo;
+
+    public function __construct(TandaDanGejalaRepo $tandaDanGejalaRepo)
+    {
+        $this->tandaDanGejalaRepo = $tandaDanGejalaRepo;
+    }
+
     public function index() {
-
-        $daftar_tanda_dan_gejala = TandaDanGejala::all();
-
-        return response()->json($daftar_tanda_dan_gejala,200);
-
+        return response()->json($this->tandaDanGejalaRepo->daftar());
     }
 
     public function store(Request $request) {
 
-        $tanda_dan_gejala = TandaDanGejala::create([
-            "nama" => $request->nama,
-            "kode" => $request->kode
-        ]);
+        $tandaDanGejalaBaru = $this->tandaDanGejalaRepo->buat($request->all());
 
         return response()->json([
-            "message" => "Data tanda dan gejala berhasil ditambahkan",
-            "data" => $tanda_dan_gejala
-        ]);
-
+            "message" => "Data tandaDanGejala berhasil dibuat",
+            "data" => $tandaDanGejalaBaru
+        ], 201);
     }
 
-    public function show(TandaDanGejala $tandaDanGejala) {
-        return response()->json($tandaDanGejala,200);
+    public function show($tandaDanGejala) {
+        return response()->json(
+            $this->tandaDanGejalaRepo->lihatId($tandaDanGejala)
+        );
     }
 
-    public function update(Request $request, TandaDanGejala $tandaDanGejala) {
+    public function update(Request $request, $tandaDanGejala) {
 
-        $tandaDanGejala->update([
-            "nama" => $request->nama,
-            "kode" => $request->kode
-        ]);
+        $d = $this->tandaDanGejalaRepo->perbarui($tandaDanGejala, $request->all());
 
         return response()->json([
-            "message" => "Data tanda dan gejala berhasil diperbarui",
-            "data" => $tandaDanGejala
-        ]);
-
+            "message" => "Data tandaDanGejala berhasil diperbarui",
+            "data" => $d
+        ], 200);
     }
 
-    public function destroy(TandaDanGejala $tandaDanGejala) {
+    public function destroy($tandaDanGejala) {
 
-        $tandaDanGejala->delete();
+        $this->tandaDanGejalaRepo->hapus($tandaDanGejala);
 
-        return response()->json(null,204);
-
+        return response()->json(null, 204);
     }
+
 }

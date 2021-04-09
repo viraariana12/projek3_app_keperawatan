@@ -3,68 +3,55 @@
 namespace App\Http\Controllers\Admin\MasterKeperawatan\SDKI;
 
 use App\Http\Controllers\Controller;
-use App\Models\MasterKeperawatan\SDKI\Diagnosis;
+use App\Repo\Eloquent\MasterKeperawatan\SDKI\Diagnosis\DiagnosisRepo;
 use Illuminate\Http\Request;
 
 
 class DiagnosisController extends Controller
 {
+
+    protected $diagnosisRepo;
+
+    public function __construct(DiagnosisRepo $diagnosisRepo)
+    {
+        $this->diagnosisRepo = $diagnosisRepo;
+    }
+
     public function index() {
-
-        $daftar_diagnosis = Diagnosis::all();
-
-        return response()->json($daftar_diagnosis,200);
-
+        return response()->json($this->diagnosisRepo->daftar());
     }
 
     public function store(Request $request) {
 
-        $diagnosis = Diagnosis::create([
-            "nama" => $request->nama,
-            "kode" => $request->kode,
-            "definisi" => $request->definisi
-        ]);
+        $diagnosisBaru = $this->diagnosisRepo->buat($request->all());
 
         return response()->json([
-            "message" => "Data diagnosis berhasil ditambahkan",
-            "data" => $diagnosis
+            "message" => "Data Diagnosis berhasil dibuat",
+            "data" => $diagnosisBaru
         ], 201);
-
     }
 
     public function show($diagnosis) {
-
-        $diagnosis = Diagnosis::find($diagnosis);
-
-        return response()->json($diagnosis,200);
-
+        return response()->json(
+            $this->diagnosisRepo->lihatId($diagnosis)
+        );
     }
 
     public function update(Request $request, $diagnosis) {
 
-        $diagnosis = Diagnosis::find($diagnosis);
-
-        $diagnosis->update([
-            "nama" => $request->nama,
-            "kode" => $request->kode,
-            "definisi" => $request->definisi
-        ]);
+        $d = $this->diagnosisRepo->perbarui($diagnosis, $request->all());
 
         return response()->json([
-            "message" => "Data diagnosis berhasil diperbarui",
-            "data" => $diagnosis
-        ]);
-
+            "message" => "Data Diagnosis berhasil diperbarui",
+            "data" => $d
+        ], 200);
     }
 
     public function destroy($diagnosis) {
 
-        $diagnosis = Diagnosis::find($diagnosis);
+        $this->diagnosisRepo->hapus($diagnosis);
 
-        $diagnosis->delete();
-
-        return response()->json(null,204);
-
+        return response()->json(null, 204);
     }
 
 }

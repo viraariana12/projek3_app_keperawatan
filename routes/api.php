@@ -1,12 +1,17 @@
 <?php
 
-use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\DiagnosisController;
-use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Relasi\DiagnosisTandaDanGejalaController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Diagnosis\DiagnosisController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Diagnosis\DiagnosisIntervensiController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Diagnosis\DiagnosisTandaDanGejalaController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Diagnosis\DiagnosisLuaranController;
 use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\TandaDanGejala\TandaDanGejalaController;
+
+use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\Luaran\LuaranController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\Luaran\LuaranDiagnosisController;
+
 use App\Http\Controllers\Admin\MasterKeperawatan\SIKI\Intervensi\IntervensiController;
-use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\LuaranController;
-use App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Relasi\DiagnosisLuaranController;
-use App\Http\Controllers\Admin\MasterKeperawatan\SLKI\Relasi\LuaranDiagnosisController;
+use App\Http\Controllers\Admin\MasterKeperawatan\SIKI\Intervensi\IntervensiDiagnosisController;
+
 use App\Http\Controllers\Admin\PasienController;
 
 use App\Http\Controllers\Perawat\AkunPerawatController;
@@ -14,6 +19,7 @@ use App\Http\Controllers\Perawat\AsuhanKeperawatan\AsuhanKeperawatanPerawatContr
 use App\Http\Controllers\Perawat\TimPerawat\AnggotaTimPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\KetuaTimPerawatController;
 use App\Http\Controllers\Perawat\TimPerawat\TimPerawatController;
+use App\Repo\Eloquent\MasterKeperawatan\SDKI\Diagnosis\Relasi\DiagnosisIntervensiRepo;
 use Illuminate\Support\Facades\Route;
 
 
@@ -63,6 +69,7 @@ Route::prefix('admin')->group(function() {
         Route::prefix('sdki')->group(function() {
 
             Route::apiResource('diagnosis', DiagnosisController::class);
+            Route::apiResource('diagnosis.intervensi', DiagnosisIntervensiController::class);
             Route::apiResource('diagnosis.luaran', DiagnosisLuaranController::class);
             Route::apiResource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);
 
@@ -82,6 +89,7 @@ Route::prefix('admin')->group(function() {
         Route::prefix('siki')->group(function() {
 
             Route::apiResource('intervensi', IntervensiController::class);
+            Route::apiResource('intervensi.diagnosis', IntervensiDiagnosisController::class);
 
         });
 

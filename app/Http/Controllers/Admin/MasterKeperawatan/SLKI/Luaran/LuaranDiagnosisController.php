@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\MasterKeperawatan\SLKI\Relasi;
+namespace App\Http\Controllers\Admin\MasterKeperawatan\SLKI\Luaran;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\MasterKeperawatan\SLKI;
+namespace App\Http\Controllers\Admin\MasterKeperawatan\SLKI\Luaran;
 
 use App\Http\Controllers\Controller;
 use App\Repo\Eloquent\MasterKeperawatan\SLKI\Luaran\LuaranRepo;

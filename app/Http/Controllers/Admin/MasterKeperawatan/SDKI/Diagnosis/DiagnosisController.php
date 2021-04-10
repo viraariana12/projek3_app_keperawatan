@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\MasterKeperawatan\SDKI;
+namespace App\Http\Controllers\Admin\MasterKeperawatan\SDKI\Diagnosis;
 
 use App\Http\Controllers\Controller;
 use App\Repo\Eloquent\MasterKeperawatan\SDKI\Diagnosis\DiagnosisRepo;

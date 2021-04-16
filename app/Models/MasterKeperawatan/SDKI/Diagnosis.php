@@ -5,6 +5,7 @@ namespace App\Models\MasterKeperawatan\SDKI;
 use App\Models\MasterKeperawatan\SLKI\Luaran;
 use App\Models\MasterKeperawatan\SIKI\Intervensi;
 use App\Models\MasterKeperawatan\SDKI\TandaDanGejala;
+use App\Models\MasterKeperawatan\SDKI\KondisiKlinis;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -45,6 +46,15 @@ class Diagnosis extends Model
             'diagnosis_keperawatan_intervensi_keperawatan',
             'id_diagnosis_keperawatan',
             'id_intervensi_keperawatan'
+        );
+    }
+
+    public function kondisi_klinis() {
+        return $this->belongsToMany(
+            KondisiKlinis::class,
+            "diagnosis_keperawatan_kondisi_klinis",
+            "id_diagnosis_keperawatan",
+            "id_kondisi_klinis"
         );
     }
 

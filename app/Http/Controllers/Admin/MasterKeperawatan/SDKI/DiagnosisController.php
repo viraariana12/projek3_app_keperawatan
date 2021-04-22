@@ -6,18 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\Admin\Buku\SDKI\TambahDiagnosisReq;
+use App\Http\Requests\Admin\Buku\SDKI\UbahDiagnosisReq;
 
 class DiagnosisController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
 
-        $daftar_diagnosis = Diagnosis::all();
+        if ($request->filled('nama')) {
+            $daftar_diagnosis = Diagnosis::like('nama', $request->nama)->get();
+        } else if ($request->filled('kode')) {
+            $daftar_diagnosis = Diagnosis::like('kode', $request->kode)->get();
+        } else {
+            $daftar_diagnosis = Diagnosis::all();
+        }
 
         return response()->json($daftar_diagnosis,200);
 
     }
 
-    public function store(Request $request) {
+    public function store(TambahDiagnosisReq $request) {
 
         $diagnosis = Diagnosis::create([
             "nama" => $request->nama,
@@ -34,15 +42,15 @@ class DiagnosisController extends Controller
 
     public function show($diagnosis) {
 
-        $diagnosis = Diagnosis::find($diagnosis);
+        $diagnosis = Diagnosis::findOrFail($diagnosis);
 
         return response()->json($diagnosis,200);
 
     }
 
-    public function update(Request $request, $diagnosis) {
+    public function update(UbahDiagnosisReq $request, $diagnosis) {
 
-        $diagnosis = Diagnosis::find($diagnosis);
+        $diagnosis = Diagnosis::findOrFail($diagnosis);
 
         $diagnosis->update([
             "nama" => $request->nama,
@@ -59,7 +67,7 @@ class DiagnosisController extends Controller
 
     public function destroy($diagnosis) {
 
-        $diagnosis = Diagnosis::find($diagnosis);
+        $diagnosis = Diagnosis::findOrFail($diagnosis);
 
         $diagnosis->delete();
 

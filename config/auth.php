@@ -36,9 +36,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'admin' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        'perawat' => [
+            'driver' => 'session',
+            'provider' => 'perawat',
         ],
 
         'api' => [
@@ -71,6 +76,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'perawat' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Subjek\Perawat::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

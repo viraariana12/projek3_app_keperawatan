@@ -18,6 +18,10 @@ class TandaDanGejala extends Model
         "kode"
     ];
 
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
     public function diagnosis() {
         return $this->belongsToMany(
             Diagnosis::class,

@@ -20,6 +20,10 @@ class Diagnosis extends Model
         'definisi'
     ];
 
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
     public function tanda_dan_gejala() {
         return $this->belongsToMany(
             TandaDanGejala::class,

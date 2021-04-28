@@ -15,6 +15,7 @@
 @php
     $tanda_dan_gejala_mayor = $diagnosis->tanda_dan_gejala()->wherePivot('mayor', 1)->get();
     $tanda_dan_gejala_minor = $diagnosis->tanda_dan_gejala()->wherePivot('mayor', 0)->get();
+    $luaran_utama = $diagnosis->luaran()->wherePivot('utama',1)->get();
 @endphp
 
 @section('isi')
@@ -74,6 +75,38 @@
                         <li>{{$tanda_dan_gejala->nama}}</li>
                     @endforeach
                 </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Luaran
+                </h3>
+            </div>
+            <div class="card-body">
+                <h5>Utama</h5>
+                <ol>
+                    @foreach ($luaran_utama as $luaran )
+                        <li>{{$luaran->nama}}</li>
+                    @endforeach
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Intervensi
+                </h3>
+            </div>
+            <div class="card-body">
+                <h5>Utama</h5>
+
             </div>
         </div>
     </div>

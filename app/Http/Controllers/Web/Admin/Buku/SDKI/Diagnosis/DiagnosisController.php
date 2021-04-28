@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Buku\SDKI\Diagnosis;
+namespace App\Http\Controllers\Web\Admin\Buku\SDKI\Diagnosis;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

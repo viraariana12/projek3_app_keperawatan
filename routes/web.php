@@ -28,8 +28,9 @@ Route::prefix('admin')->group(function() {
 Route::prefix('perawat')->group(function() {
 
     Route::view('login', 'perawat.login')->name('perawat.halaman.login');
+    Route::post('login', [AkunPerawatController::class, "login"])->name('perawat.login');
 
     Route::get('profil', [AkunPerawatController::class, "halaman_profil"])->name('perawat.halaman.profil');
-    Route::post('login', [AkunPerawatController::class, "login"])->name('perawat.login');
+    Route::post('profil', [AkunPerawatController::class, "ubah_profil"])->name('perawat.profil.ubah');
 
 });

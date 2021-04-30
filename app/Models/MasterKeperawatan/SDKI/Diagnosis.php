@@ -2,8 +2,11 @@
 
 namespace App\Models\MasterKeperawatan\SDKI;
 
+use App\Models\MasterKeperawatan\SDKI\Kategori\SubKategori;
 use App\Models\MasterKeperawatan\SLKI\Luaran;
 use App\Models\MasterKeperawatan\SDKI\TandaDanGejala;
+use App\Models\MasterKeperawatan\SDKI\Penyebab\Penyebab;
+use App\Models\MasterKeperawatan\SDKI\KondisiKlinis;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +27,14 @@ class Diagnosis extends Model
         return $query->where($field, 'LIKE', "%$value%");
     }
 
+    public function sub_kategori() {
+        return $this->belongsTo(
+            SubKategori::class,
+            "id_sub_kategori_diagnosis_keperawatan",
+            "id_sub_kategori_diagnosis_keperawatan"
+        );
+    }
+
     public function tanda_dan_gejala() {
         return $this->belongsToMany(
             TandaDanGejala::class,
@@ -42,4 +53,21 @@ class Diagnosis extends Model
         )->withPivot('utama');
     }
 
+    public function penyebab() {
+        return $this->belongsToMany(
+            Penyebab::class,
+            "diagnosis_keperawatan_penyebab",
+            "id_diagnosis_keperawatan",
+            "id_penyebab"
+        );
+    }
+
+    public function kondisi_klinis() {
+        return $this->belongsToMany(
+            KondisiKlinis::class,
+            "diagnosis_keperawatan_kondisi_klinis",
+            "id_diagnosis_keperawatan",
+            "id_kondisi_klinis"
+        );
+    }
 }

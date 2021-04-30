@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Diagnosis\DiagnosisController;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Diagnosis\DiagnosisTandaDanGejalaController;
 use App\Http\Controllers\Web\Perawat\AkunPerawatController;
+use App\Http\Controllers\Web\Perawat\Askep\AskepController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +33,7 @@ Route::prefix('perawat')->group(function() {
 
     Route::get('profil', [AkunPerawatController::class, "halaman_profil"])->name('perawat.halaman.profil');
     Route::post('profil', [AkunPerawatController::class, "ubah_profil"])->name('perawat.profil.ubah');
+
+    Route::resource('askep', AskepController::class);
 
 });

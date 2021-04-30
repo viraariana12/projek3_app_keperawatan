@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Perawat\TimPerawat;
+namespace App\Models\Keperawatan\Diagnosis;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KetuaTimPerawatController extends Model
+class RekamanEvaluasiPasien extends Model
 {
     use HasFactory;
 }

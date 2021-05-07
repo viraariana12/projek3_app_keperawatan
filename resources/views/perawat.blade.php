@@ -4,6 +4,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 @php
+
     $perawat = Auth::guard('perawat')->user();
 @endphp
 <html lang="en">
@@ -64,7 +65,69 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+            <li class="nav-header">AKUN</li>
+            <li class="nav-item">
+                <a
+                    href="{{ route('perawat.halaman.profil') }}"
+                    class="nav-link
+                    @if (Route::currentRouteName() == 'perawat.halaman.profil')
+                        active
+                    @endif
+                    "
+                >
+                    <i class="fas fa-id-badge nav-icon"></i>
+                    <p>Profil</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-sign-out-alt nav-icon"></i>
+                    <p>Keluar</p>
+                </a>
+            </li>
+            <li class="nav-header">KEPERAWATAN</li>
+            <li class="nav-item">
+                <a
+                    href="{{ route('asuhan-keperawatan.index') }}"
+                    class="nav-link
+                    @if (Route::currentRouteName() == 'asuhan-keperawatan.index')
+                        active
+                    @endif
+                    "
+                >
+                  <i class="fas fa-hand-holding-medical nav-icon"></i>
+                  <p>
+                    Asuhan Keperawatan
+                  </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-user-injured nav-icon"></i>
+                  <p>
+                    Pasien
+                  </p>
+                </a>
+            </li>
+            <li class="nav-header">BUKU</li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-book-medical nav-icon"></i>
+                    <p>SDKI (Diagnosis)</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-book-medical nav-icon"></i>
+                    <p>SIKI (Intervensi)</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-book-medical nav-icon"></i>
+                    <p>SLKI (Luaran)</p>
+                </a>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

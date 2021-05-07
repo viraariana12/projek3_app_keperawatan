@@ -42,7 +42,7 @@ class DiagnosisController extends Controller
 
 
         return redirect()
-                ->route('diagnosis.index')
+                ->route('admin.diagnosis.index')
                 ->with('status', 'Diagnosis baru berhasil ditambahkan');
     }
 
@@ -55,6 +55,7 @@ class DiagnosisController extends Controller
         ]);
 
     }
+
 
     public function edit($diagnosis) {
         $diagnosis = Diagnosis::findOrFail($diagnosis);
@@ -73,7 +74,7 @@ class DiagnosisController extends Controller
         ]);
 
         return redirect()
-                ->route('diagnosis.index')
+                ->route('admin.diagnosis.index')
                 ->with('status', 'Diagnosis berhasil diperbarui');
 
     }
@@ -85,7 +86,7 @@ class DiagnosisController extends Controller
         $diagnosis->delete();
 
         return redirect()
-                ->route('diagnosis.index')
+                ->route('admin.diagnosis.index')
                 ->with('status', 'Diagnosis berhasil dihapus');;
 
     }

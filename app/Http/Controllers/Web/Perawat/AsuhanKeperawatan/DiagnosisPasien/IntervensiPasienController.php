@@ -1,31 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Web\Perawat\Askep;
+namespace App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\DiagnosisPasien;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Keperawatan\Askep\Askep;
-use App\Models\Subjek\Pasien;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Keperawatan\Intervensi\IntervensiPasien;
+use App\Models\Keperawatan\Diagnosis\DiagnosisPasien;
 
-class AskepController extends Controller
+class IntervensiPasienController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DiagnosisPasien $diagnosisPasien)
     {
-        $perawat = Auth::guard('perawat')->user();
-
-        $daftar_askep = $perawat->askep;
-
-        return view('perawat.askep.index', [
-            "daftar_askep" => $daftar_askep
-        ]);
-
+        //
     }
 
     /**
@@ -33,13 +25,24 @@ class AskepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(DiagnosisPasien $diagnosisPasien)
     {
-        return view('perawat.askep.tambah');
-    }
+        $diagnosis = $diagnosisPasien->diagnosis;
+        $intervensi_utama = $diagnosis
+        ->intervensi()
+        ->wherePivot('utama',1)
+        ->get();
 
-    public function create_baru() {
-        return view();
+        $intervensi_tambahan = $diagnosis
+        ->intervensi()
+        ->wherePivot('utama',0)
+        ->get();
+
+        return view('perawat.askep.diagnosis.intervensi.tambah',[
+            "diagnosis_pasien" => $diagnosisPasien,
+            "intervensi_utama" => $intervensi_utama,
+            "intervensi_tambahan" => $intervensi_tambahan
+        ]);
     }
 
     /**
@@ -50,25 +53,7 @@ class AskepController extends Controller
      */
     public function store(Request $request)
     {
-        $perawat = Auth::guard('perawat')->user();
-
-        if ($request->filled('nama')) {
-            $pasien = Pasien::create([
-                "nama" => $request->nama,
-                "no_rm" => $request->no_rm,
-                "jenis_kelamin" => $request->jenis_kelamin
-            ]);
-        }
-
-        $askep = new Askep;
-
-        $askep->pasien()->associate($pasien);
-        $askep->perawat_yang_mencatat()->associate($perawat);
-
-        $askep->save();
-
-        return redirect()->route('askep.index');
-
+        //
     }
 
     /**

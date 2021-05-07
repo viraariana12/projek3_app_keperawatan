@@ -28,7 +28,7 @@ Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
 @section('isi')
 <div class="card">
     <div class="card-header">
-        <a href="{{ route('diagnosis.tanda-dan-gejala.create', $diagnosis->id_diagnosis_keperawatan) }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('admin.diagnosis.tanda-dan-gejala.create', $diagnosis->id_diagnosis_keperawatan) }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
             Buat Baru
         </a>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TabelDiagnosisKeperawatanAsuhanKeperawatan extends Migration
+class TabelIntervensiKeperawatanPasien extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class TabelDiagnosisKeperawatanAsuhanKeperawatan extends Migration
      */
     public function up()
     {
-        Schema::create('diagnosis_keperawatan_pasien', function (Blueprint $table) {
-            $table->bigIncrements('id_diagnosis_keperawatan_pasien');
-            $table->foreignId('id_asuhan_keperawatan')->nullable();
-            $table->foreignId('id_diagnosis_keperawatan')->nullable();
+        Schema::create('intervensi_keperawatan_pasien', function (Blueprint $table) {
+            $table->bigIncrements('id_intervensi_keperawatan_pasien');
+            $table->foreignId('id_diagnosis_keperawatan_pasien')->nullable();
+            $table->foreignId('id_intervensi_keperawatan')->nullable();
             $table->foreignId('id_perawat')->nullable();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class TabelDiagnosisKeperawatanAsuhanKeperawatan extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diagnosis_keperawatan_asuhan_keperawatan');
+        Schema::dropIfExists('intervensi_keperawatan_pasien');
     }
 }

@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Diagnosis\DiagnosisController;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Diagnosis\DiagnosisTandaDanGejalaController;
 use App\Http\Controllers\Web\Perawat\AkunPerawatController;
-use App\Http\Controllers\Web\Perawat\Askep\AskepController;
-
+use App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\AsuhanKeperawatanController;
+use App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\TandaDanGejalaPasienController;
+use App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\DiagnosisPasienController;
+use App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\DiagnosisPasien\IntervensiPasienController;
+use App\Http\Controllers\Web\Admin\Buku\SIKI\Intervensi\IntervensiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,8 +25,13 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->group(function() {
-    Route::resource('diagnosis', DiagnosisController::class);
-    Route::resource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);
+    Route::name('admin.')->group(function () {
+        Route::resource('diagnosis', DiagnosisController::class);
+        Route::resource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);
+
+        Route::resource('intervensi', IntervensiController::class);
+
+    });
 });
 
 Route::prefix('perawat')->group(function() {
@@ -31,9 +39,17 @@ Route::prefix('perawat')->group(function() {
     Route::view('login', 'perawat.login')->name('perawat.halaman.login');
     Route::post('login', [AkunPerawatController::class, "login"])->name('perawat.login');
 
-    Route::get('profil', [AkunPerawatController::class, "halaman_profil"])->name('perawat.halaman.profil');
-    Route::post('profil', [AkunPerawatController::class, "ubah_profil"])->name('perawat.profil.ubah');
+    Route::middleware(['auth:perawat'])->group(function () {
 
-    Route::resource('askep', AskepController::class);
+        Route::get('profil', [AkunPerawatController::class, "halaman_profil"])->name('perawat.halaman.profil');
+        Route::post('profil', [AkunPerawatController::class, "ubah_profil"])->name('perawat.profil.ubah');
+
+        Route::resource('asuhan-keperawatan', AsuhanKeperawatanController::class);
+        Route::resource('asuhan-keperawatan.tanda-dan-gejala', TandaDanGejalaPasienController::class);
+        Route::resource('asuhan-keperawatan.diagnosis', DiagnosisPasienController::class)->shallow();
+
+        Route::resource('diagnosis-pasien.intervensi-pasien', IntervensiPasienController::class);
+
+    });
 
 });

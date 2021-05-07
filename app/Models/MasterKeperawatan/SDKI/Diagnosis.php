@@ -4,6 +4,7 @@ namespace App\Models\MasterKeperawatan\SDKI;
 
 use App\Models\MasterKeperawatan\SDKI\Kategori\SubKategori;
 use App\Models\MasterKeperawatan\SLKI\Luaran;
+use App\Models\MasterKeperawatan\SIKI\Intervensi;
 use App\Models\MasterKeperawatan\SDKI\TandaDanGejala;
 use App\Models\MasterKeperawatan\SDKI\Penyebab\Penyebab;
 use App\Models\MasterKeperawatan\SDKI\KondisiKlinis;
@@ -50,6 +51,15 @@ class Diagnosis extends Model
             'diagnosis_keperawatan_luaran_keperawatan',
             'id_diagnosis_keperawatan',
             'id_luaran_keperawatan'
+        )->withPivot('utama');
+    }
+
+    public function intervensi() {
+        return $this->belongsToMany(
+            Intervensi::class,
+            "diagnosis_keperawatan_intervensi_keperawatan",
+            "id_diagnosis_keperawatan",
+            "id_intervensi_keperawatan"
         )->withPivot('utama');
     }
 

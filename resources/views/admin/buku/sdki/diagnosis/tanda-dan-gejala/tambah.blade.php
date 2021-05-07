@@ -17,7 +17,7 @@ Buat tanda dan gejala baru pada Diagnosis "{{$diagnosis->nama}}"
 <div class="row justify-content-center">
     <div class="col-8">
         <form method="POST" action="{{
-            route('diagnosis.tanda-dan-gejala.store',
+            route('admin.diagnosis.tanda-dan-gejala.store',
             $diagnosis->id_diagnosis_keperawatan)
         }}">
             @csrf
@@ -57,7 +57,7 @@ Buat tanda dan gejala baru pada Diagnosis "{{$diagnosis->nama}}"
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info">Tambahkan</button>
-                    <a href="{{ route('diagnosis.tanda-dan-gejala.index', $diagnosis->id_diagnosis_keperawatan) }}" class="btn btn-default">Batal</a>
+                    <a href="{{ route('admin.diagnosis.tanda-dan-gejala.index', $diagnosis->id_diagnosis_keperawatan) }}" class="btn btn-default">Batal</a>
                 </div>
             </div>
         </form>

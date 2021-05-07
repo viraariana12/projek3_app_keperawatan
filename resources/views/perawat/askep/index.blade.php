@@ -5,11 +5,11 @@
 @section('isi')
 <div class="card">
     <div class="card-header">
-        <a href="{{ route('askep.create') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('asuhan-keperawatan.create') }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
             Pasien Baru
         </a>
-        <a href="{{ route('diagnosis.create') }}" class="btn btn-success btn-sm">
+        <a href="#" class="btn btn-success btn-sm">
             <i class="fa fa-plus"></i>
             Pasien Lama
         </a>
@@ -32,7 +32,13 @@
                 <td>{{$askep->pasien->no_rm}}</td>
                 <td>{{$askep->pasien->nama}}</td>
                 <td>
-                    <a href="#" class="btn btn-xs btn-info">Lihat</a>
+                    <a
+                        href="{{ route(
+                                'asuhan-keperawatan.show',
+                                $askep->id_asuhan_keperawatan
+                                ) }}"
+                        class="btn btn-xs btn-info"
+                    >Lihat</a>
                 </td>
             </tr>
             @endforeach

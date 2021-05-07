@@ -3,6 +3,7 @@
 namespace App\Models\MasterKeperawatan\SIKI;
 
 use App\Models\MasterKeperawatan\SIKI\Tindakan\Tindakan;
+use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,16 @@ class Intervensi extends Model
     protected $fillable = [
         'nama', 'kode', 'definisi'
     ];
+
+    public function diagnosis() {
+        return $this->belongsToMany(
+            Diagnosis::class,
+            'diagnosis_keperawatan_intervensi_keperawatan',
+            'id_luaran_keperawatan',
+            'id_intervensi_keperawatan'
+        )->withPivot('utama');
+
+    }
 
     public function tindakan() {
         return $this->belongsToMany(

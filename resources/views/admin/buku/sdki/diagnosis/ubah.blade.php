@@ -27,7 +27,7 @@
 @section('isi')
 <div class="row justify-content-center">
     <div class="col-8">
-        <form method="POST" action="{{ route('diagnosis.update', $diagnosis->id_diagnosis_keperawatan) }}">
+        <form method="POST" action="{{ route('admin.diagnosis.update', $diagnosis->id_diagnosis_keperawatan) }}">
             @method('PUT')
             @csrf
             <div class="card card-primary">

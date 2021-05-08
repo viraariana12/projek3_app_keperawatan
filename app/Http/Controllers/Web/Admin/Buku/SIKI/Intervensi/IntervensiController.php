@@ -29,8 +29,34 @@ class IntervensiController extends Controller
         ]);
 
         return redirect()->route('admin.intervensi.index')
-        ->with('status', 'Intervensi baru berhasil ditambahkan');;
+        ->with('status', 'Intervensi baru berhasil ditambahkan');
 
+    }
+
+    public function edit(Intervensi $intervensi) {
+        return view('admin.buku.siki.intervensi.ubah', [
+            "intervensi" => $intervensi
+        ]);
+    }
+
+    public function update(Request $request, Intervensi $intervensi) {
+
+        $intervensi->update([
+            "nama" => $request->nama,
+            "kode" => $request->kode,
+            "definisi" => $request->definisi
+        ]);
+
+        return redirect()->route('admin.intervensi.index')
+        ->with('status', 'Intervensi berhasil diperbarui');
+
+    }
+
+    public function destroy(Intervensi $intervensi) {
+        $intervensi->delete();
+
+        return redirect()->route('admin.intervensi.index')
+        ->with('status', 'Intervensi berhasil dihapus');
     }
 
 }

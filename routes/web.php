@@ -10,6 +10,7 @@ use App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\DiagnosisPasienController
 use App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\DiagnosisPasien\IntervensiPasienController;
 use App\Http\Controllers\Web\Admin\Buku\SIKI\Intervensi\IntervensiController;
 use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranController;
+use App\Http\Controllers\Web\Admin\Buku\SIKI\Intervensi\IntervensiTindakanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,7 @@ Route::prefix('admin')->group(function() {
         Route::resource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);
 
         Route::resource('intervensi', IntervensiController::class);
+        Route::resource('intervensi.tindakan', IntervensiTindakanController::class);
 
         Route::resource('luaran', LuaranController::class);
 

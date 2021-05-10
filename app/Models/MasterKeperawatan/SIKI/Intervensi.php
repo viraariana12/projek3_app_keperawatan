@@ -6,6 +6,8 @@ use App\Models\MasterKeperawatan\SIKI\Tindakan\Tindakan;
 use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\MasterKeperawatan\SIKI\IntervensiTindakan;
+
 
 class Intervensi extends Model
 {
@@ -34,7 +36,9 @@ class Intervensi extends Model
             "intervensi_keperawatan_tindakan_keperawatan",
             "id_intervensi_keperawatan",
             "id_tindakan_keperawatan"
-        )->withPivot("id_jenis_tindakan_keperawatan");
+        )
+        ->withPivot(['id_jenis_tindakan_keperawatan'])
+        ->using(IntervensiTindakan::class);
     }
 
 }

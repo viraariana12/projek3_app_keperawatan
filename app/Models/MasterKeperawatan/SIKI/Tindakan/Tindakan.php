@@ -21,6 +21,7 @@ class Tindakan extends Model
             "intervensi_keperawatan_tindakan_keperawatan",
             "id_tindakan_keperawatan",
             "id_intervensi_keperawatan",
-        )->withPivot("id_jenis_tindakan_keperawatan");
+        )->withPivot("id_jenis_tindakan_keperawatan")
+        ->using(IntervensiTindakan::class);
     }
 }

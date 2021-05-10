@@ -16,6 +16,7 @@ class TabelIntervensiKeperawatanTindakanKeperawatan extends Migration
         Schema::create('intervensi_keperawatan_tindakan_keperawatan', function (Blueprint $table) {
             $table->foreignId('id_intervensi_keperawatan')->nullable();
             $table->foreignId('id_tindakan_keperawatan')->nullable();
+            $table->foreignId('id_jenis_tindakan_keperawatan')->nullable();
             $table->timestamps();
         });
     }

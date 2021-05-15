@@ -50,8 +50,39 @@ class DiagnosisController extends Controller
 
         $diagnosis = Diagnosis::findOrFail($diagnosis);
 
+        $daftar_mayor_objektif = $diagnosis
+        ->tanda_dan_gejala()
+        ->wherePivot('mayor',1)
+        ->wherePivot('objektif',1)
+        ->get();
+
+        $daftar_mayor_subjektif = $diagnosis
+        ->tanda_dan_gejala()
+        ->wherePivot('mayor',1)
+        ->wherePivot('objektif',0)
+        ->get();
+
+        $daftar_minor_objektif = $diagnosis
+        ->tanda_dan_gejala()
+        ->wherePivot('mayor',0)
+        ->wherePivot('objektif',1)
+        ->get();
+
+        $daftar_minor_subjektif = $diagnosis
+        ->tanda_dan_gejala()
+        ->wherePivot('mayor',0)
+        ->wherePivot('objektif',0)
+        ->get();
+
+        $daftar_penyebab = $diagnosis->penyebab;
+
         return view('admin.buku.sdki.diagnosis.lihat', [
-            "diagnosis" => $diagnosis
+            "diagnosis" => $diagnosis,
+            "daftar_mayor_objektif" => $daftar_mayor_objektif,
+            "daftar_mayor_subjektif" => $daftar_mayor_subjektif,
+            "daftar_minor_objektif" => $daftar_minor_objektif,
+            "daftar_minor_subjektif" => $daftar_minor_subjektif,
+            "daftar_penyebab" => $daftar_penyebab
         ]);
 
     }

@@ -82,7 +82,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-success">Simpan Perubahan</button>
-                    <a href="{{ route('diagnosis.index') }}" class="btn btn-default">Batal</a>
+                    <a href="{{ route('admin.diagnosis.index') }}" class="btn btn-default">Batal</a>
                 </div>
             </div>
         </form>

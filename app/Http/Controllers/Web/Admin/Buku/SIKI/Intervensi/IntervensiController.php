@@ -39,6 +39,16 @@ class IntervensiController extends Controller
         ]);
     }
 
+    public function show(Intervensi $intervensi) {
+
+        $daftar_tindakan = $intervensi->tindakan;
+
+        return view('admin.buku.siki.intervensi.lihat', [
+            "intervensi" => $intervensi,
+            "daftar_tindakan" => $daftar_tindakan
+        ]);
+    }
+
     public function update(Request $request, Intervensi $intervensi) {
 
         $intervensi->update([

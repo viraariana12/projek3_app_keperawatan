@@ -41,6 +41,16 @@ class LuaranController extends Controller
         ]);
     }
 
+    public function show(Luaran $luaran) {
+
+        $daftar_kriteria_hasil = $luaran->kriteria_hasil;
+
+        return view('admin.buku.slki.luaran.lihat', [
+            "luaran" => $luaran,
+            "daftar_kriteria_hasil" => $daftar_kriteria_hasil
+        ]);
+    }
+
     public function update(Request $request, Luaran $luaran) {
         $luaran->update([
             "nama" => $request->nama,

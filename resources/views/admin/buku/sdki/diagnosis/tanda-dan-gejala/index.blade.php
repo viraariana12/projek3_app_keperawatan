@@ -40,7 +40,8 @@ Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
           <tr>
             <th>#</th>
             <th>Nama</th>
-            <th>Tag</th>
+            <th>Mayor/Minor</th>
+            <th>Objektif/Subjektif</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -62,7 +63,52 @@ Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
                             </a>
                         </td>
                     @endif
-                    <td>XF</td>
+                    @if ($item->pivot->objektif)
+                        <td>
+                            <a class="btn btn-xs btn-success">
+                                Objektif
+                            </a>
+                        </td>
+                    @else
+                        <td>
+                            <a class="btn btn-xs btn-info">
+                                Subjektif
+                            </a>
+                        </td>
+                    @endif
+                    <td>
+                        <a
+                            href="
+                                {{ route(
+                                    'admin.diagnosis.tanda-dan-gejala.edit',
+                                    [
+                                        "diagnosi" => $diagnosis->id_diagnosis_keperawatan,
+                                        "tanda_dan_gejala" => $item->id_tanda_dan_gejala
+                                    ]
+                                ) }}"
+                            class="btn btn-xs btn-success"
+                        >Ubah</a>
+                        <form
+                            style="display: inline-block"
+                            method="POST"
+
+                            action="{{ route(
+                                'admin.diagnosis.tanda-dan-gejala.destroy',
+                                [
+                                    "diagnosi" => $diagnosis->id_diagnosis_keperawatan,
+                                    "tanda_dan_gejala" => $item->id_tanda_dan_gejala
+                                ]
+                            ) }}"
+                        >
+                            @csrf
+                            @method('DELETE')
+                            <button
+                            class="btn btn-xs btn-danger"
+                            >
+                                Hapus
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

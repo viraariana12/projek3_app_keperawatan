@@ -11,6 +11,8 @@ use App\Models\MasterKeperawatan\SDKI\KondisiKlinis;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\MasterKeperawatan\SDKI\DiagnosisPenyebab;
+
 class Diagnosis extends Model
 {
     use HasFactory;
@@ -69,7 +71,9 @@ class Diagnosis extends Model
             "diagnosis_keperawatan_penyebab",
             "id_diagnosis_keperawatan",
             "id_penyebab"
-        );
+        )
+        ->withPivot(["id_jenis_penyebab"])
+        ->using(DiagnosisPenyebab::class);
     }
 
     public function kondisi_klinis() {

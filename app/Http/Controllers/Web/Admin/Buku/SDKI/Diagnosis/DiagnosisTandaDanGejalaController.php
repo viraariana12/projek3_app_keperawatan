@@ -78,8 +78,8 @@ class DiagnosisTandaDanGejalaController extends Controller
         ]);
 
         return redirect()
-        ->route('diagnosis.tanda-dan-gejala.store', $diagnosis->id_diagnosis_keperawatan)
-        ->with('success', 'Data tanda dan gejala berhasil ditambahkan');
+        ->route('admin.diagnosis.tanda-dan-gejala.index', $diagnosis->id_diagnosis_keperawatan)
+        ->with('status', 'Data tanda dan gejala berhasil ditambahkan');
     }
 
     /**
@@ -99,9 +99,24 @@ class DiagnosisTandaDanGejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($diagnosis, TandaDanGejala $tandaDanGejala)
     {
-        //
+        $diagnosis = Diagnosis::findOrFail($diagnosis);
+        $pivotData = $diagnosis
+        ->tanda_dan_gejala()
+        ->firstWhere(
+            'tanda_dan_gejala.id_tanda_dan_gejala',
+            $tandaDanGejala->id_tanda_dan_gejala
+        )->pivot;
+
+        return view(
+            'admin.buku.sdki.diagnosis.tanda-dan-gejala.ubah',
+            [
+                "diagnosis" => $diagnosis,
+                "pivot_data" => $pivotData,
+                "tanda_dan_gejala" => $tandaDanGejala
+            ]
+        );
     }
 
     /**
@@ -111,9 +126,24 @@ class DiagnosisTandaDanGejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $diagnosis, TandaDanGejala $tandaDanGejala)
     {
-        //
+        $diagnosis = Diagnosis::findOrFail($diagnosis);
+
+        $tandaDanGejala->update([
+            "nama" => $request->nama
+        ]);
+
+        $diagnosis->tanda_dan_gejala()->updateExistingPivot($tandaDanGejala, [
+            "mayor" => $request->mayor,
+            "objektif" => $request->objektif
+        ]);
+
+        return redirect()
+        ->route('admin.diagnosis.tanda-dan-gejala.index', $diagnosis->id_diagnosis_keperawatan)
+        ->with('status', 'Data tanda dan gejala berhasil diubah');
+
+
     }
 
     /**
@@ -122,8 +152,14 @@ class DiagnosisTandaDanGejalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($diagnosis, TandaDanGejala $tandaDanGejala)
     {
-        //
+        $diagnosis = Diagnosis::findOrFail($diagnosis);
+
+        $diagnosis->tanda_dan_gejala()->detach($tandaDanGejala);
+
+        return redirect()
+        ->route('admin.diagnosis.tanda-dan-gejala.index', $diagnosis->id_diagnosis_keperawatan)
+        ->with('status', 'Data tanda dan gejala berhasil dihapus');
     }
 }

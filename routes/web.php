@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Diagnosis\DiagnosisController;
+use App\Http\Controllers\Web\Admin\Buku\SDKI\Diagnosis\DiagnosisPenyebabController;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Diagnosis\DiagnosisTandaDanGejalaController;
 use App\Http\Controllers\Web\Perawat\AkunPerawatController;
 use App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\AsuhanKeperawatanController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Web\Perawat\AsuhanKeperawatan\DiagnosisPasien\Intervens
 use App\Http\Controllers\Web\Admin\Buku\SIKI\Intervensi\IntervensiController;
 use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranController;
 use App\Http\Controllers\Web\Admin\Buku\SIKI\Intervensi\IntervensiTindakanController;
+use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranKriteriaHasilController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,13 +30,16 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function() {
     Route::name('admin.')->group(function () {
+
         Route::resource('diagnosis', DiagnosisController::class);
         Route::resource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);
+        Route::resource('diagnosis.penyebab', DiagnosisPenyebabController::class);
 
         Route::resource('intervensi', IntervensiController::class);
         Route::resource('intervensi.tindakan', IntervensiTindakanController::class);
 
         Route::resource('luaran', LuaranController::class);
+        Route::resource('luaran.kriteria-hasil', LuaranKriteriaHasilController::class);
 
     });
 });

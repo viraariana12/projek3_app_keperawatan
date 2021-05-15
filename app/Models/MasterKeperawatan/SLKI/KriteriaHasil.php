@@ -19,6 +19,10 @@ class KriteriaHasil extends Model
         "nama",
     ];
 
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
     public function luaran() {
         return $this->belongsToMany(
             Luaran::class,

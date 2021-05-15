@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\MasterKeperawatan\SDKI\Diagnosis;
+use App\Models\MasterKeperawatan\SDKI\DiagnosisPenyebab;
 
 class Penyebab extends Model
 {
@@ -18,13 +19,19 @@ class Penyebab extends Model
         'nama',
     ];
 
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
     public function diagnosis() {
         return $this->belongsToMany(
             Diagnosis::class,
             "diagnosis_keperawatan_penyebab",
             "id_penyebab",
             "id_diagnosis_keperawatan"
-        )->withPivot('id_jenis_penyebab');
+        )
+        ->withPivot(["id_jenis_penyebab"])
+        ->using(DiagnosisPenyebab::class);
     }
 
 }

@@ -14,6 +14,11 @@ class Pasien extends Model
     protected $fillable = [
         "nama",
         "no_rm",
+        "email",
+        "no_hp",
+        "alamat",
+        "tempat_lahir",
+        "tanggal_lahir",
         "jenis_kelamin"
     ];
 }

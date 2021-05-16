@@ -14,7 +14,7 @@ use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranController;
 use App\Http\Controllers\Web\Admin\Buku\SIKI\Intervensi\IntervensiTindakanController;
 use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranKriteriaHasilController;
 use App\Http\Controllers\Web\Admin\Pengguna\PerawatController;
-use App\Models\Subjek\Perawat;
+use App\Http\Controllers\Web\Admin\Pengguna\PasienController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +35,7 @@ Route::prefix('admin')->group(function() {
     Route::name('admin.')->group(function () {
 
         Route::resource('perawat', PerawatController::class);
+        Route::resource('pasien', PasienController::class);
 
         Route::resource('diagnosis', DiagnosisController::class);
         Route::resource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);

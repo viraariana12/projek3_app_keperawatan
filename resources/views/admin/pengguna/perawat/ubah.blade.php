@@ -61,6 +61,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-success">Simpan Perubahan</button>
+                    <a href="{{route('admin.perawat.index')}}" class="btn btn-warning">Batal</a>
                 </div>
             </form>
         </div>

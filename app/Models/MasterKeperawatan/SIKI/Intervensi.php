@@ -20,6 +20,10 @@ class Intervensi extends Model
         'nama', 'kode', 'definisi'
     ];
 
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
     public function diagnosis() {
         return $this->belongsToMany(
             Diagnosis::class,

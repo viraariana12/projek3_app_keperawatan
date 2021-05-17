@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('judul-halaman')
-Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
+Intervensi Diagnosis "{{ $diagnosis->nama }}"
 @endsection
 
 @section('style')
@@ -13,7 +13,7 @@ Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
     <li class="breadcrumb-item">Buku</li>
     <li class="breadcrumb-item">SDKI</li>
     <li class="breadcrumb-item">Diagnosis</li>
-    <li class="breadcrumb-item active"><a href="#">Tanda Dan Gejala</a></li>
+    <li class="breadcrumb-item active"><a href="#">Intervensi</a></li>
 @endsection
 
 @section('script')
@@ -28,9 +28,14 @@ Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
 @section('isi')
 <div class="card">
     <div class="card-header">
-        <a href="{{ route('admin.diagnosis.tanda-dan-gejala.create', $diagnosis->id_diagnosis_keperawatan) }}" class="btn btn-primary btn-sm">
+        <a href="
+            {{ route('admin.diagnosis.intervensi.create', $diagnosis->id_diagnosis_keperawatan) . "?utama=1" }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
-            Buat Baru
+            Utama
+        </a>
+        <a href="{{ route('admin.diagnosis.intervensi.create', $diagnosis->id_diagnosis_keperawatan) . "?utama=0" }}" class="btn btn-success btn-sm">
+            <i class="fa fa-plus"></i>
+            Tambahan
         </a>
     </div>
     <!-- ./card-header -->
@@ -39,9 +44,9 @@ Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
         <thead>
           <tr>
             <th>#</th>
+            <th>Kode</th>
             <th>Nama</th>
-            <th>Mayor/Minor</th>
-            <th>Objektif/Subjektif</th>
+            <th>Utama/Tambahan</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -49,44 +54,33 @@ Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
             @php
                 $i=1;
             @endphp
-            @foreach ($tanda_dan_gejala as $item)
+            @foreach ($daftar_intervensi as $intervensi)
                 <tr>
                     <td>{{$i++}}</td>
-                    <td>{{$item->nama}}</td>
-                    @if ($item->pivot->mayor)
+                    <td>{{$intervensi->kode}}</td>
+                    <td>{{$intervensi->nama}}</td>
+                    @if ($intervensi->pivot->utama)
                         <td>
                             <a class="btn btn-xs btn-danger">
-                                Mayor
+                                Utama
                             </a>
                         </td>
                     @else
                         <td>
                             <a class="btn btn-xs btn-warning">
-                                Minor
+                                Tambahan
                             </a>
                         </td>
                     @endif
-                    @if ($item->pivot->objektif)
-                        <td>
-                            <a class="btn btn-xs btn-success">
-                                Objektif
-                            </a>
-                        </td>
-                    @else
-                        <td>
-                            <a class="btn btn-xs btn-info">
-                                Subjektif
-                            </a>
-                        </td>
-                    @endif
+
                     <td>
                         <a
                             href="
                                 {{ route(
-                                    'admin.diagnosis.tanda-dan-gejala.edit',
+                                    'admin.diagnosis.intervensi.edit',
                                     [
                                         "diagnosi" => $diagnosis->id_diagnosis_keperawatan,
-                                        "tanda_dan_gejala" => $item->id_tanda_dan_gejala
+                                        "intervensi" => $intervensi->id_intervensi_keperawatan
                                     ]
                                 ) }}"
                             class="btn btn-xs btn-success"
@@ -96,10 +90,10 @@ Tanda dan gejala diagnosis "{{ $diagnosis->nama }}"
                             method="POST"
 
                             action="{{ route(
-                                'admin.diagnosis.tanda-dan-gejala.destroy',
+                                'admin.diagnosis.intervensi.destroy',
                                 [
                                     "diagnosi" => $diagnosis->id_diagnosis_keperawatan,
-                                    "tanda_dan_gejala" => $item->id_tanda_dan_gejala
+                                    "intervensi" => $intervensi->id_intervensi_keperawatan
                                 ]
                             ) }}"
                         >

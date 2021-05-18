@@ -12,101 +12,139 @@
     <li class="breadcrumb-item active"><a href="#">Lihat</a></li>
 @endsection
 
-@php
-    $tanda_dan_gejala_mayor = $diagnosis->tanda_dan_gejala()->wherePivot('mayor', 1)->get();
-    $tanda_dan_gejala_minor = $diagnosis->tanda_dan_gejala()->wherePivot('mayor', 0)->get();
-    $luaran_utama = $diagnosis->luaran()->wherePivot('utama',1)->get();
-@endphp
-
 @section('isi')
 <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-12">
         <div class="card">
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="kode">Kode</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="kode"
-                        placeholder="Kode Unik Diagnosis"
-                        readonly
-                        value="{{ $diagnosis->kode }}"
-                    />
-                </div>
-                <div class="form-group">
-                    <label for="definisi">Definisi</label>
-                    <textarea
-                        class="form-control"
-                        id="definisi"
-                        readonly
-                        name="definisi"
-                        rows="3"
-                    >{{ $diagnosis->definisi }}</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="kategori">Tag</label>
-                    <div class="form-control" id="kategori">
-                        <a href="#" class="btn-sm btn-primary">Kategori</a>
-                        <a href="#" class="btn-sm btn-success">Sub Kategori</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">
-                    Tanda Dan Gejala
-                </h3>
+                <div class="d-flex justify-content-between">
+                  <h3 class="card-title">Detail Diagnosis</h3>
+                  <a href="{{ route('admin.diagnosis.edit', $diagnosis->id_diagnosis_keperawatan) }}">Ubah</a>
+                </div>
             </div>
             <div class="card-body">
-                <h5>Mayor</h5>
-                <ol>
-                    @foreach ($tanda_dan_gejala_mayor as $tanda_dan_gejala )
-                        <li>{{$tanda_dan_gejala->nama}}</li>
-                    @endforeach
-                </ol>
-
-                <h5>Minor</h5>
-                <ol>
-                    @foreach ($tanda_dan_gejala_minor as $tanda_dan_gejala )
-                        <li>{{$tanda_dan_gejala->nama}}</li>
-                    @endforeach
-                </ol>
+                <dl>
+                    <dt>Kode</dt>
+                    <dd>{{$diagnosis->kode}}</dd>
+                    <dt>Definisi</dt>
+                    <dd>{{$diagnosis->definisi}}</dd>
+                </dl>
             </div>
         </div>
     </div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-6">
-        <div class="card card-primary">
+    <div class="col-12">
+        <div class="card">
             <div class="card-header">
-                <h3 class="card-title">
-                    Luaran
-                </h3>
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">Tanda dan Gejala Mayor Pasien</h3>
+                    <a href="{{ route('admin.diagnosis.tanda-dan-gejala.index', $diagnosis->id_diagnosis_keperawatan) }}">Ubah</a>
+                </div>
             </div>
-            <div class="card-body">
-                <h5>Utama</h5>
-                <ol>
-                    @foreach ($luaran_utama as $luaran )
-                        <li>{{$luaran->nama}}</li>
+            <div class="card-body p-0 row">
+                <table class="table table-sm col-6">
+                    <tr>
+                        <th colspan="2">
+                            Objektif
+                        </th>
+                    </tr>
+                    @php
+                        $i=1;
+                    @endphp
+                    @foreach ($daftar_mayor_objektif as $tanda_dan_gejala)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$tanda_dan_gejala->nama}}</td>
+                        </tr>
                     @endforeach
-                </ol>
+                </table>
+                <table class="table table-sm col-6">
+                    <tr>
+                        <th colspan="2">
+                            Subjektif
+                        </th>
+                    </tr>
+                    @php
+                        $i=1;
+                    @endphp
+                    @foreach ($daftar_mayor_subjektif as $tanda_dan_gejala)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$tanda_dan_gejala->nama}}</td>
+                        </tr>
+                    @endforeach
+                </table>
             </div>
         </div>
     </div>
-    <div class="col-6">
-        <div class="card card-primary">
+    <div class="col-12">
+        <div class="card">
             <div class="card-header">
-                <h3 class="card-title">
-                    Intervensi
-                </h3>
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">Tanda dan Gejala Minor Pasien</h3>
+                    <a href="{{ route('admin.diagnosis.tanda-dan-gejala.index', $diagnosis->id_diagnosis_keperawatan) }}">Ubah</a>
+                </div>
             </div>
-            <div class="card-body">
-                <h5>Utama</h5>
-
+            <div class="card-body p-0 row">
+                <table class="table table-sm col-6">
+                    <tr>
+                        <th colspan="2">
+                            Objektif
+                        </th>
+                    </tr>
+                    @php
+                        $i=1;
+                    @endphp
+                    @foreach ($daftar_minor_objektif as $tanda_dan_gejala)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$tanda_dan_gejala->nama}}</td>
+                        </tr>
+                    @endforeach
+                </table>
+                <table class="table table-sm col-6">
+                    <tr>
+                        <th colspan="2">
+                            Subjektif
+                        </th>
+                    </tr>
+                    @php
+                        $i=1;
+                    @endphp
+                    @foreach ($daftar_minor_subjektif as $tanda_dan_gejala)
+                        <tr>
+                            <td>{{$i++}}</td>
+                            <td>{{$tanda_dan_gejala->nama}}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                <h3 class="card-title">Penyebab</h3>
+                <a href="{{ route('admin.diagnosis.penyebab.index', $diagnosis->id_diagnosis_keperawatan) }}">Ubah</a>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-sm">
+                    <tbody>
+                        @php
+                            $i=1;
+                        @endphp
+                        @foreach ($daftar_penyebab as $penyebab)
+                            <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{$penyebab->nama}}</td>
+                                <td>{{$penyebab->pivot->jenis->nama}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

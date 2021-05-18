@@ -1,0 +1,102 @@
+@extends('admin')
+
+@section('judul-halaman')
+Tambah Luaran Utama
+@endsection
+
+@section('style')
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}" />
+@endsection
+
+@section('breadcrumb')
+    <li class="breadcrumb-item">Admin</li>
+    <li class="breadcrumb-item">Buku</li>
+    <li class="breadcrumb-item">SDKI</li>
+    <li class="breadcrumb-item">Diagnosis</li>
+    <li class="breadcrumb-item">Luaran</li>
+    <li class="breadcrumb-item"><a href="#">Tambah</a></li>
+@endsection
+
+@section('script')
+    <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+    @if (session('status'))
+        <script>
+            toastr.success("{{session('status')}}")
+        </script>
+    @endif
+@endsection
+
+@section('isi')
+<div class="card">
+
+    <div class="card-body">
+        <form action="{{ route(
+            'admin.diagnosis.luaran.create',
+            $diagnosis->id_diagnosis_keperawatan
+        ) }}" method="GET">
+            <input
+                type="hidden"
+                name="utama"
+                value="1"
+            />
+            <div class="input-group">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Masukan kata kunci"
+                    name="cari_nama"
+                />
+                <span class="input-group-append">
+                <button type="submit" class="btn btn-info btn-flat">Cari</button>
+                </span>
+            </div>
+        </form>
+        <table class="table table-sm table-head-fixed table-hover mt-2">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nama</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php
+                    $i=1;
+                @endphp
+                @foreach ($daftar_luaran as $luaran)
+                    <tr>
+                        <td>{{$i++}}</td>
+                        <td>{{$luaran->nama}}</td>
+                        <td>
+                            <form
+                                method="POST"
+                                action="{{ route(
+                                    'admin.diagnosis.luaran.store',
+                                    $diagnosis->id_diagnosis_keperawatan
+                                ) }}"
+                            >
+                                @csrf
+                                <input
+                                    type="hidden"
+                                    name="utama"
+                                    value="1" />
+                                <input
+                                    type="hidden"
+                                    name="id_luaran_keperawatan"
+                                    value="{{$luaran->id_luaran_keperawatan}}"
+                                />
+                                <button
+                                    type="submit"
+                                    class="btn btn-xs btn-info"
+                                >
+                                    Tambahkan
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection

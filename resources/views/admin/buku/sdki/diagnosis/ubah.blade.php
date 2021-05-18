@@ -27,7 +27,7 @@
 @section('isi')
 <div class="row justify-content-center">
     <div class="col-8">
-        <form method="POST" action="{{ route('diagnosis.update', $diagnosis->id_diagnosis_keperawatan) }}">
+        <form method="POST" action="{{ route('admin.diagnosis.update', $diagnosis->id_diagnosis_keperawatan) }}">
             @method('PUT')
             @csrf
             <div class="card card-primary">
@@ -82,7 +82,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-success">Simpan Perubahan</button>
-                    <a href="{{ route('diagnosis.index') }}" class="btn btn-default">Batal</a>
+                    <a href="{{ route('admin.diagnosis.index') }}" class="btn btn-default">Batal</a>
                 </div>
             </div>
         </form>

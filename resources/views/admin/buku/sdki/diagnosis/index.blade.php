@@ -28,7 +28,7 @@ Daftar Diagnosis
 @section('isi')
 <div class="card">
     <div class="card-header">
-        <a href="{{ route('diagnosis.create') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('admin.diagnosis.create') }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
             Buat Baru
         </a>
@@ -54,7 +54,7 @@ Daftar Diagnosis
                     <a href="
                         {{
                             route(
-                                'diagnosis.show',
+                                'admin.diagnosis.show',
                                 $diagnosis->id_diagnosis_keperawatan
                             )
                         }}
@@ -62,7 +62,7 @@ Daftar Diagnosis
                     <a
                         href="
                             {{ route(
-                                'diagnosis.edit',
+                                'admin.diagnosis.edit',
                                 $diagnosis->id_diagnosis_keperawatan
                             ) }}"
                         class="btn btn-xs btn-success"
@@ -71,7 +71,7 @@ Daftar Diagnosis
                         style="display: inline-block"
                         method="POST"
                         action="{{
-                            route('diagnosis.destroy',
+                            route('admin.diagnosis.destroy',
                             $diagnosis->id_diagnosis_keperawatan)
                         }}">
                         @csrf

@@ -18,6 +18,11 @@ class TabelPasien extends Migration
             $table->string('no_rm');
             $table->string('nama');
             $table->boolean('jenis_kelamin');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
+            $table->text('alamat');
+            $table->string('no_hp');
+            $table->string('email');
             $table->timestamps();
         });
     }

@@ -61,7 +61,58 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-id-card nav-icon"></i>
+                  <p>
+                    Profil Admin
+                  </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-sign-out-alt nav-icon"></i>
+                  <p>
+                    Keluar
+                  </p>
+                </a>
+            </li>
+            <li class="nav-header">Data Pengguna</li>
+            <li class="nav-item">
+                <a href="{{route('admin.pasien.index')}}" class="nav-link">
+                  <i class="fas fa-user-injured nav-icon"></i>
+                  <p>
+                    Pasien
+                  </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('admin.perawat.index')}}" class="nav-link">
+                  <i class="fas fa-user-nurse nav-icon"></i>
+                  <p>
+                    Perawat
+                  </p>
+                </a>
+            </li>
+            <li class="nav-header">Data Keperawatan</li>
+            <li class="nav-item">
+                <a href="{{ route('admin.diagnosis.index') }}" class="nav-link">
+                    <i class="fas fa-book-medical nav-icon"></i>
+                    <p>SDKI (Diagnosis)</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.intervensi.index') }}" class="nav-link">
+                    <i class="fas fa-book-medical nav-icon"></i>
+                    <p>SIKI (Intervensi)</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.luaran.index') }}" class="nav-link">
+                    <i class="fas fa-book-medical nav-icon"></i>
+                    <p>SLKI (Luaran)</p>
+                </a>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

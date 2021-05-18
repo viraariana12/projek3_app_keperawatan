@@ -6,6 +6,8 @@ use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\MasterKeperawatan\SLKI\KriteriaHasil;
+
 class Luaran extends Model
 {
     use HasFactory;
@@ -18,6 +20,19 @@ class Luaran extends Model
         'kode',
         'definisi'
     ];
+
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
+    public function kriteria_hasil() {
+        return $this->belongsToMany(
+            KriteriaHasil::class,
+            "luaran_keperawatan_kriteria_hasil",
+            "id_luaran_keperawatan",
+            "id_kriteria_hasil"
+        );
+    }
 
     public function diagnosis() {
 

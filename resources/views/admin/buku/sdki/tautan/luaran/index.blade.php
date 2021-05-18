@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('judul-halaman')
-Intervensi Diagnosis "{{ $diagnosis->nama }}"
+Luaran Diagnosis "{{ $diagnosis->nama }}"
 @endsection
 
 @section('style')
@@ -13,7 +13,7 @@ Intervensi Diagnosis "{{ $diagnosis->nama }}"
     <li class="breadcrumb-item">Buku</li>
     <li class="breadcrumb-item">SDKI</li>
     <li class="breadcrumb-item">Diagnosis</li>
-    <li class="breadcrumb-item active"><a href="#">Intervensi</a></li>
+    <li class="breadcrumb-item active"><a href="#">Luaran</a></li>
 @endsection
 
 @section('script')
@@ -29,11 +29,11 @@ Intervensi Diagnosis "{{ $diagnosis->nama }}"
 <div class="card">
     <div class="card-header">
         <a href="
-            {{ route('admin.diagnosis.intervensi.create', $diagnosis->id_diagnosis_keperawatan) . "?utama=1" }}" class="btn btn-primary btn-sm">
+            {{ route('admin.diagnosis.luaran.create', $diagnosis->id_diagnosis_keperawatan) . "?utama=1" }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
             Utama
         </a>
-        <a href="{{ route('admin.diagnosis.intervensi.create', $diagnosis->id_diagnosis_keperawatan) . "?utama=0" }}" class="btn btn-success btn-sm">
+        <a href="{{ route('admin.diagnosis.luaran.create', $diagnosis->id_diagnosis_keperawatan) . "?utama=0" }}" class="btn btn-success btn-sm">
             <i class="fa fa-plus"></i>
             Tambahan
         </a>
@@ -54,20 +54,20 @@ Intervensi Diagnosis "{{ $diagnosis->nama }}"
             @php
                 $i=1;
             @endphp
-            @foreach ($daftar_intervensi as $intervensi)
+            @foreach ($daftar_luaran as $luaran)
                 <tr>
                     <td>{{$i++}}</td>
                     <td>
-                        <a href="{{ route('admin.intervensi.show', $intervensi->id_intervensi_keperawatan) }}">
-                            {{$intervensi->kode}}
+                        <a href="{{ route('admin.luaran.show', $luaran->id_luaran_keperawatan) }}">
+                            {{$luaran->kode}}
                         </a>
                     </td>
                     <td>
-                        <a href="{{ route('admin.intervensi.show', $intervensi->id_intervensi_keperawatan) }}">
-                            {{$intervensi->nama}}
+                        <a href="{{ route('admin.luaran.show', $luaran->id_luaran_keperawatan) }}">
+                            {{$luaran->nama}}
                         </a>
                     </td>
-                    @if ($intervensi->pivot->utama)
+                    @if ($luaran->pivot->utama)
                         <td>
                             <a class="btn btn-xs btn-danger">
                                 Utama
@@ -85,10 +85,10 @@ Intervensi Diagnosis "{{ $diagnosis->nama }}"
                         <a
                             href="
                                 {{ route(
-                                    'admin.diagnosis.intervensi.edit',
+                                    'admin.diagnosis.luaran.edit',
                                     [
                                         "diagnosi" => $diagnosis->id_diagnosis_keperawatan,
-                                        "intervensi" => $intervensi->id_intervensi_keperawatan
+                                        "luaran" => $luaran->id_luaran_keperawatan
                                     ]
                                 ) }}"
                             class="btn btn-xs btn-success"
@@ -98,10 +98,10 @@ Intervensi Diagnosis "{{ $diagnosis->nama }}"
                             method="POST"
 
                             action="{{ route(
-                                'admin.diagnosis.intervensi.destroy',
+                                'admin.diagnosis.luaran.destroy',
                                 [
                                     "diagnosi" => $diagnosis->id_diagnosis_keperawatan,
-                                    "intervensi" => $intervensi->id_intervensi_keperawatan
+                                    "luaran" => $luaran->id_luaran_keperawatan
                                 ]
                             ) }}"
                         >

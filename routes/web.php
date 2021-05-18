@@ -16,6 +16,8 @@ use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranKriteriaHasilControlle
 use App\Http\Controllers\Web\Admin\Pengguna\PerawatController;
 use App\Http\Controllers\Web\Admin\Pengguna\PasienController;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Tautan\DiagnosisIntervensiController;
+use App\Http\Controllers\Web\Admin\Buku\SDKI\Tautan\DiagnosisLuaranController;
+use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,7 @@ Route::prefix('admin')->group(function() {
         Route::resource('diagnosis.penyebab', DiagnosisPenyebabController::class);
 
         Route::resource('diagnosis.intervensi', DiagnosisIntervensiController::class);
+        Route::resource('diagnosis.luaran', DiagnosisLuaranController::class);
 
         Route::resource('intervensi', IntervensiController::class);
         Route::resource('intervensi.tindakan', IntervensiTindakanController::class);

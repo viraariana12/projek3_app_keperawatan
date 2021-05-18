@@ -21,6 +21,10 @@ class Luaran extends Model
         'definisi'
     ];
 
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
     public function kriteria_hasil() {
         return $this->belongsToMany(
             KriteriaHasil::class,

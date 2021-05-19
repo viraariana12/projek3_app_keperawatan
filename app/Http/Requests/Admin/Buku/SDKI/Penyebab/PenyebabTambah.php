@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Buku\SDKI;
+namespace App\Http\Requests\Admin\Buku\SDKI\Penyebab;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TambahDiagnosisReq extends FormRequest
+class PenyebabTambah extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,25 @@ class TambahDiagnosisReq extends FormRequest
     public function rules()
     {
         return [
-            "nama" => "required",
-            "definisi" => "required",
-            "kode" => "required|unique:App\Models\MasterKeperawatan\SDKI\Diagnosis,kode"
+            "nama" => [
+                "required",
+                "unique:App\Models\MasterKeperawatan\SDKI\Penyebab\Penyebab,nama"
+            ]
         ];
     }
 
+    public function attributes()
+    {
+        return [
+            "nama" => "Nama",
+        ];
+    }
 
     public function messages()
     {
         return [
-            "required" => "Kolom ini wajib diisi",
-            "unique" => "Sudah ada yang menggunakan"
+            "required" => "Kolom :attribute wajib diisi",
+            "unique" => ":attribute ini sudah ada yang menggunakan"
         ];
     }
-
 }

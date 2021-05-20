@@ -15,7 +15,6 @@ class TabelTandaDanGejala extends Migration
     {
         Schema::create('tanda_dan_gejala', function (Blueprint $table) {
             $table->bigIncrements('id_tanda_dan_gejala');
-            $table->string('kode',10);
             $table->string('nama');
             $table->timestamps();
         });

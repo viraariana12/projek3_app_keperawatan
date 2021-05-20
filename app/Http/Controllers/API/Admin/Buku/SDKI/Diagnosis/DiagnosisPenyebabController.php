@@ -17,11 +17,28 @@ class DiagnosisPenyebabController extends Controller
     public function index(Request $request, Diagnosis $diagnosi) {
 
         if ($request->filled('nama')) {
-            $daftar_penyebab = $diagnosi->penyebab()
+            $daftar_data = $diagnosi->penyebab()
             ->where('nama', $request->nama)
             ->get();
         } else {
-            $daftar_penyebab = $diagnosi->penyebab;
+            $daftar_data = $diagnosi->penyebab;
+        }
+
+        $daftar_penyebab = [];
+
+        foreach ($daftar_data as $data) {
+
+            $penyebab = [
+                "id_penyebab" => $data->id_penyebab,
+                "nama" => $data->nama,
+                "jenis" => [
+                    "id_jenis_penyebab" => $data->pivot->jenis->id_jenis_penyebab,
+                    "nama" => $data->pivot->jenis->nama
+                ]
+            ];
+
+            $daftar_penyebab[] = $penyebab;
+
         }
 
         return response()->json([
@@ -56,7 +73,7 @@ class DiagnosisPenyebabController extends Controller
 
         $jenis_penyebab = $request->id_jenis_penyebab;
 
-        $diagnosi->penyebab()->updateExistingPivot($penyebab, [
+        $diagnosi->penyebab()->updateExistingPivot($penyebab->id_penyebab, [
             "id_jenis_penyebab" => $jenis_penyebab
         ]);
 

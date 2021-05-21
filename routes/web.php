@@ -17,7 +17,6 @@ use App\Http\Controllers\Web\Admin\Pengguna\PerawatController;
 use App\Http\Controllers\Web\Admin\Pengguna\PasienController;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Tautan\DiagnosisIntervensiController;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Tautan\DiagnosisLuaranController;
-use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 
 /*
 |--------------------------------------------------------------------------

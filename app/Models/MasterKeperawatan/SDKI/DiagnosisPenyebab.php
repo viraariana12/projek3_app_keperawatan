@@ -8,6 +8,7 @@ use App\Models\MasterKeperawatan\SDKI\Penyebab\Jenis;
 
 class DiagnosisPenyebab extends Pivot
 {
+
     public function jenis() {
         return $this->belongsTo(
             Jenis::class,

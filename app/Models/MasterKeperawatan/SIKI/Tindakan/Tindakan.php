@@ -6,6 +6,8 @@ use App\Models\MasterKeperawatan\SIKI\Intervensi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\MasterKeperawatan\SIKI\IntervensiTindakan;
+
 class Tindakan extends Model
 {
     use HasFactory;

@@ -16,6 +16,7 @@ class Perawat extends Authenticatable
     protected $table = "perawat";
     protected $primaryKey = "id_perawat";
     protected $fillable = [
+        "aktif",
         "nama",
         "jenis_kelamin",
         "tempat_lahir",
@@ -52,5 +53,9 @@ class Perawat extends Authenticatable
             "id_perawat",
             "id_perawat"
         );
+    }
+
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
     }
 }

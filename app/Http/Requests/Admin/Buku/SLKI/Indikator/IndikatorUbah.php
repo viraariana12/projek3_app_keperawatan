@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Admin\Buku\SIKI\Intervensi;
+namespace App\Http\Requests\Admin\Buku\SLKI\Indikator;
 
 use Illuminate\Foundation\Http\FormRequest;
+
 use Illuminate\Validation\Rule;
 
-
-class IntervensiUbah extends FormRequest
+class IndikatorUbah extends FormRequest
 {
-    /**
+   /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -25,20 +25,14 @@ class IntervensiUbah extends FormRequest
      */
     public function rules()
     {
-        $id_intervensi = $this->route('intervensi');
+        $id_indikator = $this->route('indikator');
 
         return [
             "nama" => [
                 "required",
-                Rule::unique('intervensi_keperawatan','nama')
-                ->ignore($id_intervensi, 'id_intervensi_keperawatan')
+                Rule::unique('indikator','nama')
+                ->ignore($id_indikator, 'id_indikator')
             ],
-            "definisi" => ["required"],
-            "kode" => [
-                "required",
-                Rule::unique('intervensi_keperawatan','kode')
-                ->ignore($id_intervensi, 'id_intervensi_keperawatan')
-            ]
         ];
     }
 
@@ -46,8 +40,6 @@ class IntervensiUbah extends FormRequest
     {
         return [
             "nama" => "Nama",
-            "definisi" => "Definisi",
-            "kode" => "Kode"
         ];
     }
 

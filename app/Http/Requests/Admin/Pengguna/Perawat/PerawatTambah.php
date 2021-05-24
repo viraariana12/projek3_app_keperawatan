@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Admin\Buku\SIKI\Tindakan;
+namespace App\Http\Requests\Admin\Pengguna\Perawat;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use Illuminate\Validation\Rule;
-
-class TindakanUbah extends FormRequest
+class PerawatTambah extends FormRequest
 {
-   /**
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -25,14 +23,11 @@ class TindakanUbah extends FormRequest
      */
     public function rules()
     {
-        $id_tindakan = $this->route('tindakan');
-
         return [
-            "nama" => [
-                "required",
-                Rule::unique('tindakan_keperawatan','nama')
-                ->ignore($id_tindakan, 'id_tindakan_keperawatan')
-            ],
+            "nama" => ["required"],
+            "email" => ["required", "unique:perawat,email"],
+            "password" => ["required"],
+            "aktif" => ["required", "boolean"]
         ];
     }
 
@@ -40,6 +35,9 @@ class TindakanUbah extends FormRequest
     {
         return [
             "nama" => "Nama",
+            "email" => "Alamat E-Mail",
+            "aktif" => "Aktif",
+            "password" => "Password"
         ];
     }
 
@@ -47,7 +45,7 @@ class TindakanUbah extends FormRequest
     {
         return [
             "required" => "Kolom :attribute wajib diisi",
-            "unique" => ":attribute ini sudah ada yang menggunakan"
+            "unique" => ":attribute sudah ada yang menggunakan"
         ];
     }
 }

@@ -15,6 +15,7 @@ class TabelPerawat extends Migration
     {
         Schema::create('perawat', function (Blueprint $table) {
             $table->bigIncrements('id_perawat');
+            $table->boolean('aktif')->nullable();
             $table->string('nama');
             $table->tinyInteger('jenis_kelamin')->nullable();
             $table->string('tempat_lahir')->nullable();

@@ -42,13 +42,30 @@ class DiagnosisPenyebabController extends Controller
         }
 
         return response()->json([
-            "status" => "Daftar Penyebab berhasil dimuat",
-            "data" => [
-                "daftar_penyebab" => $daftar_penyebab
-            ]
-        ], 200);
+            "status" => true,
+            "code" => 200,
+            "message" => "Data Penyebab Diagnosis berhasil dimuat",
+            "data" =>  $daftar_penyebab
+        ], 201);
     }
 
+
+    public function create(Diagnosis $diagnosi) {
+
+        $pengecualian = $diagnosi
+            ->penyebab()
+            ->get()
+            ->modelKeys();
+
+        $daftar_penyebab = Penyebab::all()->except($pengecualian);
+
+        return response()->json([
+            "status" => true,
+            "code" => 200,
+            "message" => "Data Penyebab Diagnosis berhasil dimuat",
+            "data" =>  $daftar_penyebab
+        ], 201);
+    }
 
     public function store(DiagnosisPenyebabTambah $request, Diagnosis $diagnosi) {
 

@@ -12,7 +12,20 @@ use App\Http\Controllers\API\Admin\Buku\SIKI\Intervensi\IntervensiController;
 use App\Http\Controllers\API\Admin\Buku\SIKI\Intervensi\IntervensiTindakanController;
 
 use App\Http\Controllers\API\Admin\Buku\SIKI\Tindakan\TindakanController;
-use App\Models\MasterKeperawatan\SIKI\IntervensiTindakan;
+use App\Http\Controllers\API\Admin\Buku\SIKI\Tindakan\JenisTindakanController;
+
+use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranController;
+use App\Http\Controllers\API\Admin\Buku\SLKI\Indikator\IndikatorController;
+
+use App\Http\Controllers\API\Admin\Profil\AuthController as AdminAuthController;
+use App\Http\Controllers\API\Admin\Profil\ProfilController as AdminProfilController;
+
+use App\Http\Controllers\API\Perawat\Profil\AuthController as PerawatAuthController;
+use App\Http\Controllers\API\Perawat\Profil\ProfilController as PerawatProfilController;
+use App\Http\Controllers\API\Perawat\Pengguna\PasienController;
+use App\Http\Controllers\API\Admin\Pengguna\PerawatController;
+
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,32 +41,66 @@ Route::name('api.')->group(function () {
 
     Route::group(["prefix" => "admin", "name" => "admin."], function(){
 
-        Route::group(["prefix" => "buku", "name" => "buku."], function(){
+        Route::post('login', [AdminAuthController::class, "login"]);
 
-            Route::group(["prefix" => "sdki", "name" => "sdki."], function(){
+        Route::group(["middleware" => "auth:sanctum"], function() {
 
-                Route::apiResource('diagnosis', DiagnosisController::class);
-                Route::apiResource('diagnosis.penyebab', DiagnosisPenyebabController::class);
-                Route::apiResource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);
+            Route::group(["middleware" => "admin"], function() {
 
-                Route::apiResource('penyebab', PenyebabController::class);
-                Route::apiResource('jenis-penyebab', JenisPenyebabController::class);
+                Route::post('profil', [AdminProfilController::class, "update_profil"]);
 
-                Route::apiResource('tanda-dan-gejala', TandaDanGejalaController::class);
+                Route::resource('perawat', PerawatController::class);
 
-            });
+                Route::group(["prefix" => "buku", "name" => "buku."], function(){
 
-            Route::group(["prefix" => "siki", "name" => "siki."], function(){
+                    Route::group(["prefix" => "sdki", "name" => "sdki."], function(){
 
-                Route::apiResource('intervensi', IntervensiController::class);
-                Route::apiResource('intervensi.tindakan', IntervensiTindakan::class);
+                        Route::resource('diagnosis', DiagnosisController::class);
+                        Route::resource('diagnosis.penyebab', DiagnosisPenyebabController::class);
+                        Route::resource('diagnosis.tanda-dan-gejala', DiagnosisTandaDanGejalaController::class);
 
-                Route::apiResource('tindakan', TindakanController::class);
+                        Route::resource('penyebab', PenyebabController::class);
+                        Route::resource('jenis-penyebab', JenisPenyebabController::class);
 
+                        Route::resource('tanda-dan-gejala', TandaDanGejalaController::class);
+
+                    });
+
+                    Route::group(["prefix" => "siki", "name" => "siki."], function(){
+
+                        Route::resource('intervensi', IntervensiController::class);
+                        Route::resource('intervensi.tindakan', IntervensiTindakanController::class);
+
+                        Route::resource('tindakan', TindakanController::class);
+                        Route::resource('jenis-tindakan', JenisTindakanController::class);
+
+                    });
+
+                    Route::group(["prefix" => "siki", "name" => "siki."], function(){
+                        Route::resource('luaran', LuaranController::class);
+                        Route::resource('indikator', IndikatorController::class);
+                    });
+                });
             });
 
         });
+    });
 
+    Route::group(["prefix" => "perawat", "name" => "perawat."], function(){
+
+        Route::post('login', [PerawatAuthController::class, "login"]);
+        Route::post('register', [PerawatAuthController::class, "register"]);
+
+        Route::group(["middleware" => "auth:sanctum"], function() {
+
+            Route::get('profil', [PerawatProfilController::class, "lihat_profil"]);
+            Route::post('profil', [PerawatProfilController::class, "update_profil"]);
+
+            Route::group(["middleware" => "perawat"], function() {
+                Route::resource('pasien', PasienController::class);
+            });
+
+        });
 
     });
 });

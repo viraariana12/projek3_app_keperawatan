@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\API\Admin\Buku\SIKI\Tindakan;
+namespace App\Http\Controllers\API\Admin\Buku\SLKI\Indikator;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\MasterKeperawatan\SIKI\Tindakan\Tindakan;
+use App\Models\MasterKeperawatan\SLKI\Indikator;
 
-use App\Http\Requests\Admin\Buku\SIKI\Tindakan\TindakanTambah;
-use App\Http\Requests\Admin\Buku\SIKI\Tindakan\TindakanUbah;
+use App\Http\Requests\Admin\Buku\SLKI\Indikator\IndikatorTambah;
+use App\Http\Requests\Admin\Buku\SLKI\Indikator\IndikatorUbah;
 
-class TindakanController extends Controller
+class IndikatorController extends Controller
 {
     public function index(Request $request) {
         $kolom = [
@@ -19,12 +19,12 @@ class TindakanController extends Controller
         ];
 
         if ($request->filled('nama')) {
-            $daftar_tindakan = Tindakan::like(
+            $daftar_tindakan = Indikator::like(
                 'nama',
                 $request->nama
             )->get($kolom);
         } else {
-            $daftar_tindakan = Tindakan::all($kolom);
+            $daftar_tindakan = Indikator::all($kolom);
         }
 
         return response()->json([
@@ -35,16 +35,16 @@ class TindakanController extends Controller
         ], 201);
     }
 
-    public function store(TindakanTambah $request) {
+    public function store(IndikatorTambah $request) {
 
-        $tindakan = Tindakan::create([
+        $tindakan = Indikator::create([
             "nama" => $request->nama
         ]);
 
         return response()->json([
             "status" => true,
             "code" => 200,
-            "message" => "Data Tindakan berhasil ditambahkan",
+            "message" => "Data Indikator berhasil ditambahkan",
             "data" => [
                 "id_tindakan_keperawatan" => $tindakan->id_tindakan_keperawatan,
                 "nama" => $tindakan->nama
@@ -53,7 +53,7 @@ class TindakanController extends Controller
 
     }
 
-    public function update(TindakanUbah $request, Tindakan $tindakan) {
+    public function update(IndikatorUbah $request, Indikator $tindakan) {
 
         $tindakan->update([
             "nama" => $request->nama
@@ -62,7 +62,7 @@ class TindakanController extends Controller
         return response()->json([
             "status" => true,
             "code" => 200,
-            "message" => "Data Tindakan berhasil diperbarui",
+            "message" => "Data Indikator berhasil diperbarui",
             "data" => [
                 "id_tindakan_keperawatan" => $tindakan->id_tindakan_keperawatan,
                 "nama" => $tindakan->nama
@@ -71,22 +71,22 @@ class TindakanController extends Controller
 
     }
 
-    public function show(Tindakan $tindakan) {
+    public function show(Indikator $tindakan) {
         return response()->json([
             "status" => true,
             "code" => 200,
-            "message" => "Data Tindakan berhasil dimuat",
+            "message" => "Data Indikator berhasil dimuat",
             "data" => $tindakan
         ],201);
     }
 
-    public function destroy(Tindakan $tindakan) {
+    public function destroy(Indikator $tindakan) {
         $tindakan->delete();
 
         return response()->json([
             "status" => true,
             "code" => 204,
-            "message" => "Data Tindakan berhasil dihapus",
+            "message" => "Data Indikator berhasil dihapus",
             "data" => null
         ], 201);
     }

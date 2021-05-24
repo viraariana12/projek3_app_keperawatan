@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Buku\SIKI\Intervensi;
+namespace App\Http\Requests\Admin\Buku\SLKI\Luaran;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-
-class IntervensiUbah extends FormRequest
+class LuaranTambah extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,19 +23,15 @@ class IntervensiUbah extends FormRequest
      */
     public function rules()
     {
-        $id_intervensi = $this->route('intervensi');
-
         return [
             "nama" => [
                 "required",
-                Rule::unique('intervensi_keperawatan','nama')
-                ->ignore($id_intervensi, 'id_intervensi_keperawatan')
+                "unique:App\Models\MasterKeperawatan\SLKI\Luaran,nama"
             ],
             "definisi" => ["required"],
             "kode" => [
                 "required",
-                Rule::unique('intervensi_keperawatan','kode')
-                ->ignore($id_intervensi, 'id_intervensi_keperawatan')
+                "unique:App\Models\MasterKeperawatan\SLKI\Luaran,kode"
             ]
         ];
     }

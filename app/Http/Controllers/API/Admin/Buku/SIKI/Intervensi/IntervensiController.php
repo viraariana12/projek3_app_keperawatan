@@ -35,11 +35,11 @@ class IntervensiController extends Controller
         }
 
         return response()->json([
-            "status" => "Daftar intervensi berhasil dimuat",
-            "data" => [
-                "daftar_intervensi" => $daftar_intervensi
-            ]
-        ], 200);
+            "status" => true,
+            "code" => 200,
+            "message" => "Daftar intervensi berhasil dimuat",
+            "data" =>  $daftar_intervensi
+        ], 201);
     }
 
     public function store(IntervensiTambah $request) {
@@ -51,13 +51,13 @@ class IntervensiController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Intervensi baru berhasil ditambahkan",
+            "status" => true,
+            "code" => 201,
+            "message" => "Data Intervensi baru berhasil ditambahkan",
             "data" => [
-                "intervensi" => [
-                    "id_intervensi_keperawatan" => $intervensi->id_intervensi_keperawatan,
-                    "nama" => $intervensi->nama,
-                    "kode" => $intervensi->kode
-                ]
+                "id_intervensi_keperawatan" => $intervensi->id_intervensi_keperawatan,
+                "nama" => $intervensi->nama,
+                "kode" => $intervensi->kode
             ]
         ], 201);
     }
@@ -71,25 +71,25 @@ class IntervensiController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Intervensi baru berhasil diperbarui",
+            "status" => true,
+            "code" => 200,
+            "message" => "Data Intervensi baru berhasil diperbarui",
             "data" => [
-                "intervensi" => [
-                    "id_intervensi_keperawatan" => $intervensi->id_intervensi_keperawatan,
-                    "nama" => $intervensi->nama,
-                    "kode" => $intervensi->kode
-                ]
+                "id_intervensi_keperawatan" => $intervensi->id_intervensi_keperawatan,
+                "nama" => $intervensi->nama,
+                "kode" => $intervensi->kode
             ]
-        ], 200);
+        ], 201);
 
     }
 
     public function show(Intervensi $intervensi) {
         return response()->json([
-            "status" => "Data Intervensi berhasil dimuat",
-            "data" => [
-                "intervensi" => $intervensi
-            ]
-        ]);
+            "status" => true,
+            "code" => 200,
+            "message" => "Data Intervensi berhasil dimuat",
+            "data" =>  $intervensi
+        ], 201);
     }
 
     public function destroy(Intervensi $intervensi) {
@@ -97,9 +97,11 @@ class IntervensiController extends Controller
         $intervensi->delete();
 
         return response()->json([
-            "status" => "Data Intervensi berhasil dihapus",
+            "status" => true,
+            "code" => 204,
+            "message" => "Data Intervensi berhasil dihapus",
             "data" => null
-        ],204);
+        ],201);
 
     }
 }

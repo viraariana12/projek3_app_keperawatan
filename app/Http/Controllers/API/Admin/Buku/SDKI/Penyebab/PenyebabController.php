@@ -28,11 +28,11 @@ class PenyebabController extends Controller
         }
 
         return response()->json([
-            "status" => "Daftar penyebab berhasil dimuat",
-            "data" => [
-                "daftar_penyebab" => $daftar_penyebab
-            ]
-        ], 200);
+            "status" => true,
+            "code" => 200,
+            "message" => "Daftar penyebab berhasil dimuat",
+            "data" =>  $daftar_penyebab
+        ], 201);
     }
 
     public function store(PenyebabTambah $request) {
@@ -42,12 +42,12 @@ class PenyebabController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Penyebab berhasil ditambahkan",
+            "status" => true,
+            "code" => 201,
+            "message" => "Penyebab baru berhasil ditambahkan",
             "data" => [
-                "penyebab" => [
-                    "id_penyebab" => $penyebab->id_penyebab,
-                    "nama" => $penyebab->nama
-                ]
+                "id_penyebab" => $penyebab->id_penyebab,
+                "nama" => $penyebab->nama
             ]
         ],201);
 
@@ -60,31 +60,33 @@ class PenyebabController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Penyebab berhasil diperbarui",
+            "status" => true,
+            "code" => 200,
+            "message" => "Penyebab berhasil diperbarui",
             "data" => [
-                "penyebab" => [
-                    "id_penyebab" => $penyebab->id_penyebab,
-                    "nama" => $penyebab->nama
-                ]
+                "id_penyebab" => $penyebab->id_penyebab,
+                "nama" => $penyebab->nama
             ]
-        ],200);
+        ],201);
 
     }
 
     public function show(Penyebab $penyebab) {
         return response()->json([
             "status" => "Data Penyebab berhasil dimuat",
-            "data" => [
-                "penyebab" => $penyebab
-            ]
+            "data" =>  $penyebab
         ]);
     }
 
     public function destroy(Penyebab $penyebab) {
+
         $penyebab->delete();
+
         return response()->json([
-            "status" => "Data Penyebab berhasil dihapus",
+            "status" => true,
+            "code" => 204,
+            "message" => "Penyebab berhasil dihapus",
             "data" => null
-        ]);
+        ],201);
     }
 }

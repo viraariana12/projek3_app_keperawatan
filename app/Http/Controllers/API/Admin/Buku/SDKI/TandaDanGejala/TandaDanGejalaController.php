@@ -28,11 +28,11 @@ class TandaDanGejalaController extends Controller
         }
 
         return response()->json([
-            "status" => "Daftar Tanda Dan Gejala berhasil dimuat",
-            "data" => [
-                "daftar_tanda_dan_gejala" => $daftar_tanda_dan_gejala
-            ]
-        ], 200);
+            "status" => true,
+            "code" => 200,
+            "message" => "Daftar tanda dan gejala berhasil dimuat",
+            "data" =>  $daftar_tanda_dan_gejala
+        ], 201);
     }
 
     public function store(TandaDanGejalaTambah $request) {
@@ -42,12 +42,12 @@ class TandaDanGejalaController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Tanda dan Gejala berhasil ditambahkan",
+            "status" => true,
+            "code" => 201,
+            "message" =>  "Data Tanda dan Gejala berhasil ditambahkan",
             "data" => [
-                "tanda_dan_gejala" => [
-                    "id_tanda_dan_gejala" => $tandaDanGejala->id_tanda_dan_gejala,
-                    "nama" => $tandaDanGejala->nama
-                ]
+                "id_tanda_dan_gejala" => $tandaDanGejala->id_tanda_dan_gejala,
+                "nama" => $tandaDanGejala->nama
             ]
         ],201);
 
@@ -60,12 +60,12 @@ class TandaDanGejalaController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Tanda dan Gejala berhasil diperbarui",
-            "data" => [
-                "tanda_dan_gejala" => [
-                    "id_tanda_dan_gejala" => $tandaDanGejala->id_tanda_dan_gejala,
-                    "nama" => $tandaDanGejala->nama
-                ]
+            "status" => true,
+            "code" => 200,
+            "message" =>  "Data Tanda dan Gejala berhasil diperbarui",
+            "data" =>  [
+                "id_tanda_dan_gejala" => $tandaDanGejala->id_tanda_dan_gejala,
+                "nama" => $tandaDanGejala->nama
             ]
         ],200);
 
@@ -74,9 +74,7 @@ class TandaDanGejalaController extends Controller
     public function show(TandaDanGejala $tandaDanGejala) {
         return response()->json([
             "status" => "Data Tanda dan Gejala berhasil dimuat",
-            "data" => [
-                "tanda_dan_gejala" => $tandaDanGejala
-            ]
+            "data" =>  $tandaDanGejala
         ]);
     }
 
@@ -84,8 +82,10 @@ class TandaDanGejalaController extends Controller
         $tandaDanGejala->delete();
 
         return response()->json([
-            "status" => "Data Tanda dan Gejala berhasil dihapus",
+            "status" => true,
+            "code" => 204,
+            "message" => "Data Tanda dan Gejala berhasil dihapus",
             "data" => null
-        ], 204);
+        ], 201);
     }
 }

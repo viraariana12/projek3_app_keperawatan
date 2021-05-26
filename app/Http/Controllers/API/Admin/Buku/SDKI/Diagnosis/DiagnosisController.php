@@ -34,11 +34,11 @@ class DiagnosisController extends Controller
         }
 
         return response()->json([
-            "status" => "Daftar diagnosis berhasil dimuat",
-            "data" => [
-                "daftar_diagnosis" => $daftar_diagnosis
-            ]
-        ], 200);
+            "status" => true,
+            "code" => 200,
+            "message" => "Daftar diagnosis berhasil dimuat",
+            "data" => $daftar_diagnosis
+        ], 201);
     }
 
     public function store(DiagnosisTambah $request) {
@@ -50,15 +50,17 @@ class DiagnosisController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Diagnosis baru berhasil ditambahkan",
+            "status" => true,
+            "code" => 201,
+            "message" => "Diagnosis baru berhasil disimpan",
             "data" => [
-                "diagnosis" => [
-                    "id_diagnosis_keperawatan" => $diagnosis->id_diagnosis_keperawatan,
-                    "nama" => $diagnosis->nama,
-                    "kode" => $diagnosis->kode
-                ]
+                "id_diagnosis_keperawatan" => $diagnosis->id_diagnosis_keperawatan,
+                "nama" => $diagnosis->nama,
+                "kode" => $diagnosis->kode,
+                "definisi" => $diagnosis->definisi
             ]
         ], 201);
+
     }
 
     public function update(DiagnosisUbah $request, Diagnosis $diagnosi) {
@@ -72,24 +74,23 @@ class DiagnosisController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Diagnosis baru berhasil diperbarui",
+            "status" => true,
+            "code" => 200,
+            "message" => "Data Diagnosis berhasil diubah",
             "data" => [
-                "diagnosis" => [
-                    "id_diagnosis_keperawatan" => $diagnosis->id_diagnosis_keperawatan,
-                    "nama" => $diagnosis->nama,
-                    "kode" => $diagnosis->kode
-                ]
+                "id_diagnosis_keperawatan" => $diagnosis->id_diagnosis_keperawatan,
+                "nama" => $diagnosis->nama,
+                "kode" => $diagnosis->kode,
+                "definisi" => $diagnosis->definisi
             ]
-        ], 200);
+        ], 201);
 
     }
 
     public function show(Diagnosis $diagnosi) {
         return response()->json([
             "status" => "Data Diagnosis berhasil dimuat",
-            "data" => [
-                "diagnosis" => $diagnosi
-            ]
+            "data" => $diagnosi
         ]);
     }
 
@@ -98,9 +99,11 @@ class DiagnosisController extends Controller
         $diagnosi->delete();
 
         return response()->json([
-            "status" => "Data Diagnosis berhasil dihapus",
+            "status" => true,
+            "code" => 204,
+            "message" => "Data Diagnosis berhasil dihapus",
             "data" => null
-        ],204);
+        ], 201);
 
     }
 }

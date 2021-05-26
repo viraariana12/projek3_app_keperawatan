@@ -28,11 +28,11 @@ class TindakanController extends Controller
         }
 
         return response()->json([
-            "status" => "Daftar tindakan berhasil dimuat",
-            "data" => [
-                "daftar_tindakan" => $daftar_tindakan
-            ]
-        ], 200);
+            "status" => true,
+            "code" => 200,
+            "message" => "Daftar tindakan berhasil dimuat",
+            "data" =>  $daftar_tindakan
+        ], 201);
     }
 
     public function store(TindakanTambah $request) {
@@ -42,12 +42,12 @@ class TindakanController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Tindakan berhasil ditambahkan",
+            "status" => true,
+            "code" => 200,
+            "message" => "Data Tindakan berhasil ditambahkan",
             "data" => [
-                "tindakan" => [
-                    "id_tindakan_keperawatan" => $tindakan->id_tindakan_keperawatan,
-                    "nama" => $tindakan->nama
-                ]
+                "id_tindakan_keperawatan" => $tindakan->id_tindakan_keperawatan,
+                "nama" => $tindakan->nama
             ]
         ],201);
 
@@ -60,32 +60,34 @@ class TindakanController extends Controller
         ]);
 
         return response()->json([
-            "status" => "Data Tindakan berhasil diperbarui",
+            "status" => true,
+            "code" => 200,
+            "message" => "Data Tindakan berhasil diperbarui",
             "data" => [
-                "tindakan" => [
-                    "id_tindakan_keperawatan" => $tindakan->id_tindakan_keperawatan,
-                    "nama" => $tindakan->nama
-                ]
+                "id_tindakan_keperawatan" => $tindakan->id_tindakan_keperawatan,
+                "nama" => $tindakan->nama
             ]
-        ],200);
+        ],201);
 
     }
 
     public function show(Tindakan $tindakan) {
         return response()->json([
-            "status" => "Data Tindakan berhasil dimuat",
-            "data" => [
-                "tindakan" => $tindakan
-            ]
-        ]);
+            "status" => true,
+            "code" => 200,
+            "message" => "Data Tindakan berhasil dimuat",
+            "data" => $tindakan
+        ],201);
     }
 
     public function destroy(Tindakan $tindakan) {
         $tindakan->delete();
 
         return response()->json([
-            "status" => "Data Tindakan berhasil dihapus",
+            "status" => true,
+            "code" => 204,
+            "message" => "Data Tindakan berhasil dihapus",
             "data" => null
-        ], 204);
+        ], 201);
     }
 }

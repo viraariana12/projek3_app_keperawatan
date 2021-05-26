@@ -21,4 +21,8 @@ class Pasien extends Model
         "tanggal_lahir",
         "jenis_kelamin"
     ];
+
+    public  function scopeLike($query, $field, $value){
+        return $query->where($field, 'LIKE', "%$value%");
+    }
 }

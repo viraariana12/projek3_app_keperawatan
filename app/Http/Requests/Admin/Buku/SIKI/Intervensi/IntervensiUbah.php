@@ -25,7 +25,7 @@ class IntervensiUbah extends FormRequest
      */
     public function rules()
     {
-        $id_intervensi = $this->route('diagnosi');
+        $id_intervensi = $this->route('intervensi');
 
         return [
             "nama" => [

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\MasterKeperawatan\SLKI\Luaran;
-use Faker\Calculator\Luhn;
 
 class KriteriaHasil extends Model
 {

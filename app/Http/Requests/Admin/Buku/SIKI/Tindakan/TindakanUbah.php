@@ -30,8 +30,8 @@ class TindakanUbah extends FormRequest
         return [
             "nama" => [
                 "required",
-                Rule::unique('tindakan','nama')
-                ->ignore($id_tindakan, 'id_tindakan')
+                Rule::unique('tindakan_keperawatan','nama')
+                ->ignore($id_tindakan, 'id_tindakan_keperawatan')
             ],
         ];
     }

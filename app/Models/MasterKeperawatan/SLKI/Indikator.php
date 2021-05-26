@@ -14,6 +14,5 @@ class Indikator extends Model
 
     protected $fillable = [
         "nama",
-        "nilai"
     ];
 }

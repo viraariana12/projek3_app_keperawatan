@@ -25,8 +25,6 @@ use App\Http\Controllers\API\Perawat\Profil\ProfilController as PerawatProfilCon
 use App\Http\Controllers\API\Perawat\Pengguna\PasienController;
 use App\Http\Controllers\API\Admin\Pengguna\PerawatController;
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,6 +44,8 @@ Route::name('api.')->group(function () {
         Route::group(["middleware" => "auth:sanctum"], function() {
 
             Route::group(["middleware" => "admin"], function() {
+
+                // Hanya admin yang bisa mengakses
 
                 Route::post('profil', [AdminProfilController::class, "update_profil"]);
 
@@ -97,6 +97,9 @@ Route::name('api.')->group(function () {
             Route::post('profil', [PerawatProfilController::class, "update_profil"]);
 
             Route::group(["middleware" => "perawat"], function() {
+
+                // Perawat yang sudah diaktifkan oleh admin
+
                 Route::resource('pasien', PasienController::class);
             });
 

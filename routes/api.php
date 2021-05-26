@@ -14,8 +14,10 @@ use App\Http\Controllers\API\Admin\Buku\SIKI\Intervensi\IntervensiTindakanContro
 use App\Http\Controllers\API\Admin\Buku\SIKI\Tindakan\TindakanController;
 use App\Http\Controllers\API\Admin\Buku\SIKI\Tindakan\JenisTindakanController;
 
-use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranController;
+use App\Http\Controllers\API\Admin\Buku\SLKI\Luaran\LuaranController;
 use App\Http\Controllers\API\Admin\Buku\SLKI\Indikator\IndikatorController;
+use App\Http\Controllers\API\Admin\Buku\SLKI\KriteriaHasil\KriteriaHasilController;
+use App\Http\Controllers\API\Admin\Buku\SLKI\Luaran\LuaranKriteriaHasilController;
 
 use App\Http\Controllers\API\Admin\Profil\AuthController as AdminAuthController;
 use App\Http\Controllers\API\Admin\Profil\ProfilController as AdminProfilController;
@@ -76,9 +78,12 @@ Route::name('api.')->group(function () {
 
                     });
 
-                    Route::group(["prefix" => "siki", "name" => "siki."], function(){
+                    Route::group(["prefix" => "slki", "name" => "slki."], function(){
                         Route::resource('luaran', LuaranController::class);
-                        Route::resource('indikator', IndikatorController::class);
+                        Route::resource('luaran.kriteria-hasil', LuaranKriteriaHasilController::class);
+
+                        Route::resource('kriteria-hasil', KriteriaHasilController::class);
+                        // Route::resource('indikator', IndikatorController::class);
                     });
                 });
             });

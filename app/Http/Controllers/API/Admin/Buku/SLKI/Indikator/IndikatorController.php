@@ -14,30 +14,30 @@ class IndikatorController extends Controller
 {
     public function index(Request $request) {
         $kolom = [
-            "id_tindakan_keperawatan",
+            "id_indikator_luaran",
             "nama",
         ];
 
         if ($request->filled('nama')) {
-            $daftar_tindakan = Indikator::like(
+            $daftar_indikator = Indikator::like(
                 'nama',
                 $request->nama
             )->get($kolom);
         } else {
-            $daftar_tindakan = Indikator::all($kolom);
+            $daftar_indikator = Indikator::all($kolom);
         }
 
         return response()->json([
             "status" => true,
             "code" => 200,
-            "message" => "Daftar tindakan berhasil dimuat",
-            "data" =>  $daftar_tindakan
+            "message" => "Daftar indikator berhasil dimuat",
+            "data" =>  $daftar_indikator
         ], 201);
     }
 
     public function store(IndikatorTambah $request) {
 
-        $tindakan = Indikator::create([
+        $indikator = Indikator::create([
             "nama" => $request->nama
         ]);
 
@@ -46,16 +46,16 @@ class IndikatorController extends Controller
             "code" => 200,
             "message" => "Data Indikator berhasil ditambahkan",
             "data" => [
-                "id_tindakan_keperawatan" => $tindakan->id_tindakan_keperawatan,
-                "nama" => $tindakan->nama
+                "id_indikator_luaran" => $indikator->id_indikator_luaran,
+                "nama" => $indikator->nama
             ]
         ],201);
 
     }
 
-    public function update(IndikatorUbah $request, Indikator $tindakan) {
+    public function update(IndikatorUbah $request, Indikator $indikator) {
 
-        $tindakan->update([
+        $indikator->update([
             "nama" => $request->nama
         ]);
 
@@ -64,24 +64,24 @@ class IndikatorController extends Controller
             "code" => 200,
             "message" => "Data Indikator berhasil diperbarui",
             "data" => [
-                "id_tindakan_keperawatan" => $tindakan->id_tindakan_keperawatan,
-                "nama" => $tindakan->nama
+                "id_indikator_luaran" => $indikator->id_indikator_luaran,
+                "nama" => $indikator->nama
             ]
         ],201);
 
     }
 
-    public function show(Indikator $tindakan) {
+    public function show(Indikator $indikator) {
         return response()->json([
             "status" => true,
             "code" => 200,
             "message" => "Data Indikator berhasil dimuat",
-            "data" => $tindakan
+            "data" => $indikator
         ],201);
     }
 
-    public function destroy(Indikator $tindakan) {
-        $tindakan->delete();
+    public function destroy(Indikator $indikator) {
+        $indikator->delete();
 
         return response()->json([
             "status" => true,

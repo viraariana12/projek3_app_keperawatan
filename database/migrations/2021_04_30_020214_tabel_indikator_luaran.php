@@ -16,7 +16,6 @@ class TabelIndikatorLuaran extends Migration
         Schema::create('indikator_luaran', function (Blueprint $table) {
             $table->bigIncrements('id_indikator_luaran');
             $table->string('nama');
-            $table->string('nilai');
             $table->timestamps();
         });
     }

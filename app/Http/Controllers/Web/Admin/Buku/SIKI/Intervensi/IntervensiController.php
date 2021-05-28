@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\MasterKeperawatan\SIKI\Intervensi;
+use App\Http\Requests\Admin\Buku\SIKI\Intervensi\IntervensiTambah;
+use App\Http\Requests\Admin\Buku\SIKI\Intervensi\IntervensiUbah;
 
 class IntervensiController extends Controller
 {
@@ -20,7 +22,7 @@ class IntervensiController extends Controller
         return view('admin.buku.siki.intervensi.tambah');
     }
 
-    public function store(Request $request) {
+    public function store(IntervensiTambah $request) {
 
         Intervensi::create([
             "nama" => $request->nama,
@@ -49,7 +51,7 @@ class IntervensiController extends Controller
         ]);
     }
 
-    public function update(Request $request, Intervensi $intervensi) {
+    public function update(IntervensiUbah $request, Intervensi $intervensi) {
 
         $intervensi->update([
             "nama" => $request->nama,

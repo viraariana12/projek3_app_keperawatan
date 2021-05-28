@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\MasterKeperawatan\SLKI\Luaran;
+use App\Http\Requests\Admin\Buku\SLKI\Luaran\LuaranTambah;
+use App\Http\Requests\Admin\Buku\SLKI\Luaran\LuaranUbah;
 
 class LuaranController extends Controller
 {
@@ -23,7 +25,7 @@ class LuaranController extends Controller
         return view('admin.buku.slki.luaran.tambah');
     }
 
-    public function store(Request $request) {
+    public function store(LuaranTambah $request) {
 
         Luaran::create([
             "nama" => $request->nama,
@@ -51,7 +53,7 @@ class LuaranController extends Controller
         ]);
     }
 
-    public function update(Request $request, Luaran $luaran) {
+    public function update(LuaranUbah $request, Luaran $luaran) {
         $luaran->update([
             "nama" => $request->nama,
             "kode" => $request->kode,

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Subjek\Pasien;
+use App\Http\Requests\Perawat\Pengguna\Pasien\PasienTambah;
+use App\Http\Requests\Perawat\Pengguna\Pasien\PasienUbah;
 
 class PasienController extends Controller
 {
@@ -28,7 +30,7 @@ class PasienController extends Controller
         ]);
     }
 
-    public function store(Request $request) {
+    public function store(PasienTambah $request) {
 
         Pasien::create([
             "nama" => $request->nama,
@@ -45,7 +47,7 @@ class PasienController extends Controller
         ->with('status', 'Pasien berhasil ditambahkan');
     }
 
-    public function update(Request $request, Pasien $pasien) {
+    public function update(PasienUbah $request, Pasien $pasien) {
 
         $pasien->update([
             "nama" => $request->nama,

@@ -20,7 +20,7 @@ class AkunPerawatController extends Controller
             "email" => $email,
             "password" => $password
         ])) {
-            return redirect()->route('perawat.halaman.profil');
+            return redirect()->intended('perawat/profil');
         } else {
             return redirect()->route('perawat.halaman.login');
         }

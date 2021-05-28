@@ -88,9 +88,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="nav-header">KEPERAWATAN</li>
             <li class="nav-item">
                 <a
-                    href="{{ route('asuhan-keperawatan.index') }}"
+                    href="{{ route('perawat.asuhan-keperawatan.index') }}"
                     class="nav-link
-                    @if (Route::currentRouteName() == 'asuhan-keperawatan.index')
+                    @if (Route::currentRouteName() == 'perawat.asuhan-keperawatan.index')
                         active
                     @endif
                     "

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Subjek\Perawat;
 use Illuminate\Support\Facades\Hash;
 
+use App\Http\Requests\Admin\Pengguna\Perawat\PerawatTambah;
+use App\Http\Requests\Admin\Pengguna\Perawat\PerawatUbah;
+
 class PerawatController extends Controller
 {
 
@@ -31,7 +34,7 @@ class PerawatController extends Controller
         ]);
     }
 
-    public function update(Request $request, Perawat $perawat) {
+    public function update(PerawatUbah $request, Perawat $perawat) {
 
         $perawat->update([
             "nama" => $request->nama,
@@ -48,7 +51,7 @@ class PerawatController extends Controller
 
     }
 
-    public function store(Request $request) {
+    public function store(PerawatTambah $request) {
 
         Perawat::create([
             "nama" => $request->nama,

@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\MasterKeperawatan\SDKI\Diagnosis;
 
-use App\Http\Requests\Admin\Buku\SDKI\TambahDiagnosisReq;
-use App\Http\Requests\Admin\Buku\SDKI\UbahDiagnosisReq;
+use App\Http\Requests\Admin\Buku\SDKI\Diagnosis\DiagnosisTambah;
+use App\Http\Requests\Admin\Buku\SDKI\Diagnosis\DiagnosisUbah;
 
 class DiagnosisController extends Controller
 {
@@ -32,7 +32,7 @@ class DiagnosisController extends Controller
         return view('admin.buku.sdki.diagnosis.tambah');
     }
 
-    public function store(TambahDiagnosisReq $request) {
+    public function store(DiagnosisTambah $request) {
 
         Diagnosis::create([
             "nama" => $request->nama,
@@ -46,9 +46,9 @@ class DiagnosisController extends Controller
                 ->with('status', 'Diagnosis baru berhasil ditambahkan');
     }
 
-    public function show($diagnosis) {
+    public function show(Diagnosis $diagnosi) {
 
-        $diagnosis = Diagnosis::findOrFail($diagnosis);
+        $diagnosis = $diagnosi;
 
         $daftar_mayor_objektif = $diagnosis
         ->tanda_dan_gejala()
@@ -88,17 +88,15 @@ class DiagnosisController extends Controller
     }
 
 
-    public function edit($diagnosis) {
-        $diagnosis = Diagnosis::findOrFail($diagnosis);
+    public function edit(Diagnosis $diagnosi) {
 
-        return view('admin.buku.sdki.diagnosis.ubah', ["diagnosis" => $diagnosis]);
+        return view('admin.buku.sdki.diagnosis.ubah', ["diagnosis" => $diagnosi]);
     }
 
-    public function update(UbahDiagnosisReq $request, $diagnosis) {
+    public function update(DiagnosisUbah $request, Diagnosis $diagnosi) {
 
-        $diagnosis = Diagnosis::findOrFail($diagnosis);
 
-        $diagnosis->update([
+        $diagnosi->update([
             "nama" => $request->nama,
             "kode" => $request->kode,
             "definisi" => $request->definisi
@@ -110,11 +108,9 @@ class DiagnosisController extends Controller
 
     }
 
-    public function destroy($diagnosis) {
+    public function destroy(Diagnosis $diagnosi) {
 
-        $diagnosis = Diagnosis::findOrFail($diagnosis);
-
-        $diagnosis->delete();
+        $diagnosi->delete();
 
         return redirect()
                 ->route('admin.diagnosis.index')

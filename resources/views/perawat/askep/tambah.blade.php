@@ -5,7 +5,7 @@
 @section('isi')
 <div class="row justify-content-center">
     <div class="col-8">
-        <form method="POST" action="{{ route('asuhan-keperawatan.store') }}">
+        <form method="POST" action="{{ route('perawat.asuhan-keperawatan.store') }}">
             @csrf
             <div class="card card-primary">
                 <div class="card-body">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info">Buat</button>
-                    <a href="{{ route('asuhan-keperawatan.index') }}" class="btn btn-default">Batal</a>
+                    <a href="{{ route('perawat.asuhan-keperawatan.index') }}" class="btn btn-default">Batal</a>
                 </div>
             </div>
         </form>

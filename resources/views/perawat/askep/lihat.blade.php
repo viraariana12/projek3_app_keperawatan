@@ -65,7 +65,7 @@ Asuhan Keperawatan Pasien
                 <div class="card-tools">
                     <a href="{{
                         route(
-                            'asuhan-keperawatan.tanda-dan-gejala.create',
+                            'perawat.asuhan-keperawatan.tanda-dan-gejala.create',
                             $asuhan_keperawatan->id_asuhan_keperawatan
                         ) }}" class="btn btn-xs btn-info">
                         Tambah
@@ -109,7 +109,7 @@ Asuhan Keperawatan Pasien
                 <div class="card-tools">
                     <a href="{{
                         route(
-                            'asuhan-keperawatan.diagnosis.create',
+                            'perawat.asuhan-keperawatan.diagnosis.create',
                             $asuhan_keperawatan->id_asuhan_keperawatan
                         ) }}" class="btn btn-xs btn-info">
                         Tambah

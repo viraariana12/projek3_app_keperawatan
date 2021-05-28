@@ -5,13 +5,9 @@
 @section('isi')
 <div class="card">
     <div class="card-header">
-        <a href="{{ route('asuhan-keperawatan.create') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('perawat.asuhan-keperawatan.create') }}" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i>
-            Pasien Baru
-        </a>
-        <a href="#" class="btn btn-success btn-sm">
-            <i class="fa fa-plus"></i>
-            Pasien Lama
+            Buat Baru
         </a>
     </div>
     <!-- ./card-header -->
@@ -34,7 +30,7 @@
                 <td>
                     <a
                         href="{{ route(
-                                'asuhan-keperawatan.show',
+                                'perawat.asuhan-keperawatan.show',
                                 $askep->id_asuhan_keperawatan
                                 ) }}"
                         class="btn btn-xs btn-info"

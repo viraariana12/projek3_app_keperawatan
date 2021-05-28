@@ -15,6 +15,9 @@ use App\Http\Controllers\Web\Admin\Buku\SIKI\Intervensi\IntervensiTindakanContro
 use App\Http\Controllers\Web\Admin\Buku\SLKI\Luaran\LuaranKriteriaHasilController;
 use App\Http\Controllers\Web\Admin\Pengguna\PerawatController;
 use App\Http\Controllers\Web\Admin\Pengguna\PasienController;
+
+use App\Http\Controllers\Web\Perawat\Pengguna\PasienController as PerawatPasienController;
+
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Tautan\DiagnosisIntervensiController;
 use App\Http\Controllers\Web\Admin\Buku\SDKI\Tautan\DiagnosisLuaranController;
 use App\Http\Controllers\Web\Admin\AuthController as AdminAuthController;
@@ -75,7 +78,33 @@ Route::name('perawat.')->group(function () {
             Route::get('profil', [AkunPerawatController::class, "halaman_profil"])->name('halaman.profil');
             Route::post('profil', [AkunPerawatController::class, "ubah_profil"])->name('profil.ubah');
 
+            Route::resource('pasien', PerawatPasienController::class);
+
+            Route::get(
+                'asuhan-keperawatan/pasien-baru',
+                [
+                    AsuhanKeperawatanController::class,
+                    "create_pasien_baru"
+                ]
+            )->name('asuhan-keperawatan.form-pasien-baru');
+            Route::post(
+                'asuhan-keperawatan/pasien-baru',
+                [
+                    AsuhanKeperawatanController::class,
+                    "store_pasien_baru"
+                ]
+            )->name('asuhan-keperawatan.pasien-baru');
+
+            Route::post(
+                'asuhan-keperawatan/pasien-lama',
+                [
+                    AsuhanKeperawatanController::class,
+                    "store_pasien_lama"
+                ]
+            )->name('asuhan-keperawatan.pasien-lama');
+
             Route::resource('asuhan-keperawatan', AsuhanKeperawatanController::class);
+
             Route::resource('asuhan-keperawatan.tanda-dan-gejala', TandaDanGejalaPasienController::class);
             Route::resource('asuhan-keperawatan.diagnosis', DiagnosisPasienController::class)->shallow();
 

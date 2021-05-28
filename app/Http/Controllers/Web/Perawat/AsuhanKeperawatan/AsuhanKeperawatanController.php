@@ -9,6 +9,8 @@ use App\Models\Keperawatan\AsuhanKeperawatan;
 use App\Models\Subjek\Pasien;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Requests\Perawat\Pengguna\Pasien\PasienTambah;
+
 class AsuhanKeperawatanController extends Controller
 {
     /**
@@ -33,14 +35,70 @@ class AsuhanKeperawatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('perawat.askep.tambah');
+
+        if ($request->filled('no_rm')) {
+            $daftar_pasien = Pasien::like('no_rm', $request->no_rm)->get();
+        } else {
+            $daftar_pasien = Pasien::all();
+        }
+
+        return view('perawat.askep.index-pasien', [
+            "daftar_pasien" => $daftar_pasien
+        ]);
     }
 
-    public function create_baru() {
-        return view();
+
+    public function store_pasien_lama(Request $request) {
+
+        $perawat = Auth::guard('perawat')->user();
+
+        $pasien = Pasien::findOrFail($request->id_pasien);
+        $askep = new AsuhanKeperawatan;
+
+        $askep->pasien()->associate($pasien);
+        $askep->perawat_yang_mencatat()->associate($perawat);
+
+        $askep->save();
+
+        return redirect()->route('perawat.asuhan-keperawatan.show', [
+            "asuhan_keperawatan" => $askep->id_asuhan_keperawatan
+        ]);
     }
+
+    public function create_pasien_baru() {
+        return view('perawat.askep.tambah-pasien-baru');
+    }
+
+    public function store_pasien_baru(PasienTambah $request) {
+
+        $perawat = Auth::guard('perawat')->user();
+
+        $pasien = Pasien::create([
+            "nama" => $request->nama,
+            "no_rm" => $request->no_rm,
+            "jenis_kelamin" => $request->jenis_kelamin,
+            "tempat_lahir" => $request->tempat_lahir,
+            "tanggal_lahir" => $request->tanggal_lahir,
+            "alamat" => $request->alamat,
+            "no_hp" => $request->no_hp,
+            "email" => $request->email
+        ]);
+
+        $askep = new AsuhanKeperawatan;
+
+        $askep->pasien()->associate($pasien);
+        $askep->perawat_yang_mencatat()->associate($perawat);
+
+        $askep->save();
+
+        return redirect()->route('perawat.asuhan-keperawatan.show', [
+            "asuhan_keperawatan" => $askep->id_asuhan_keperawatan
+        ]);
+
+    }
+
 
     /**
      * Store a newly created resource in storage.

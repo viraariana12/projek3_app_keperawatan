@@ -14,7 +14,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <form  action="{{ route(
-                        'asuhan-keperawatan.tanda-dan-gejala.create',
+                        'perawat.asuhan-keperawatan.tanda-dan-gejala.create',
                         $asuhan_keperawatan->id_asuhan_keperawatan
                         ) }}" method="GET">
                         <div class="input-group">
@@ -43,7 +43,7 @@
                             <td>
                                 <form action="
                                     {{ route(
-                                        'asuhan-keperawatan.tanda-dan-gejala.store',
+                                        'perawat.asuhan-keperawatan.tanda-dan-gejala.store',
                                         $asuhan_keperawatan->id_asuhan_keperawatan
                                     ) }}" method="POST">
                                     @csrf

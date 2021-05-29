@@ -65,7 +65,7 @@ class DiagnosisPasienController extends Controller
             $diagnosis_pasien->save();
 
             return redirect()->route(
-                'asuhan-keperawatan.show',
+                'perawat.asuhan-keperawatan.show',
                 $asuhanKeperawatan->id_asuhan_keperawatan
             );
 

@@ -18,7 +18,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <form  action="{{ route(
-                        'asuhan-keperawatan.diagnosis.create',
+                        'perawat.asuhan-keperawatan.diagnosis.create',
                         $asuhan_keperawatan->id_asuhan_keperawatan
                         ) }}" method="GET">
                         <div class="input-group">
@@ -49,7 +49,7 @@
                             <td>
                                 <form action="
                                     {{ route(
-                                        'asuhan-keperawatan.diagnosis.store',
+                                        'perawat.asuhan-keperawatan.diagnosis.store',
                                         $asuhan_keperawatan->id_asuhan_keperawatan
                                     ) }}" method="POST">
                                     @csrf
